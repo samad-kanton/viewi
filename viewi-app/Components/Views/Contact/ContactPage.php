@@ -11,19 +11,10 @@ class ContactPage extends BaseComponent
     public string $statusMessage = "loading...";
 
     private HttpClient $http;
-    // private MessageService $messageService;
-
-    // public function __construct(HttpClient $http)
-    // {
-    //     $this->http = $http;
-    //     // $this->messageService = $messageService;
-    // }
 
     public function pop()
     {
-        // $event->preventDefault();
-        // $this->http->get("https://jsonplaceholder.typicode.com/todos")
-        $this->http->get("/api/name")
+        $this->http->get("https://jsonplaceholder.typicode.com/todos")
         ->then(function ($data) {
             // use $data here
             $this->statusMessage = 'We have received Your message and we will get to you shortly';
