@@ -14,9 +14,19 @@ function RenderContactPage_Slot(
     $_content = '';
 
     $_content .= '
-    <h1>';
+    <div class="p-4 sm:ml-64">
+        <h1>';
     $_content .= htmlentities($_component->title ?? '');
     $_content .= '</h1>
+        ';
+    $_content .= $_component->pop();
+    $_content .= '
+        <p>
+            ';
+    $_content .= htmlentities($_component->statusMessage ?? '');
+    $_content .= '
+        </p>
+    </div>
 ';
     return $_content;
    

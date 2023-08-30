@@ -3,24 +3,37 @@
 
 <head>
     <title>
-        $title | Viewi
+        $title
     </title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- <CssBundle link="./css/main.css" /> -->
-    <CssBundle links="{['/css/main.css']}" />
+    <link rel="shortcut icon" href="/viewi-app/assets/icons/favicon.ico" type="image/x-icon">
+    <CssBundle links="{['/viewi-app/assets/lib/css/main.css']}" />
+    <link rel="stylesheet" href="https://cdn.lineicons.com/4.0/lineicons.css" />
 
+    <!-- <script src="https://unpkg.com/ionicons@5.0.0/dist/ionicons.js"></script> -->
+    <!-- <link href='https://unpkg.com/css.gg@2.0.0/icons/css/abstract.css' rel='stylesheet' /> -->
+    <!-- <script src="/viewi-app/assets/lib/js/tailwindcss@3.3.3.js"></script> -->
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
 <body>
-    <div id="sidebar">
-        <MenuBar />
+
+    <div id="layout-main">
+        <NavBar />
+        <SideBar />
+        
+        <main class="mt-11 sm:mt-9 bg-red-500">
+            <slot></slot>
+        </main>        
     </div>
-    <div id="content">
-        <slot></slot>
-    </div>
+    
     <ViewiScripts />
+
+    <script src="/viewi-app/assets/lib/js/uikit@3.16.24.min.js"></script>
+    <script src="/viewi-app/assets/lib/js/uikit-icons@3.16.24.min.js"></script>
+    <script src="/viewi-app/assets/lib/js/flowbite@1.8.1.min.js"></script>
 </body>
 
 </html>

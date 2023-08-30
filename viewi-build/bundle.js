@@ -144,76 +144,31 @@ function json_encode (mixedVal) {
 var viewiBundleEntry = function (exports, bring) {
     var $base = bring('$base');
     var notify = bring('notify');
-var NotFoundPage = function () {
+// use Application\Components\Services\Demo\CounterState;
+var NavBar = function () {
     var $this = this;
     $base(this);
+    // public CounterState $counter;
+    // public function __init(CounterState $counterState)
+    // {
+    //     $this->counter = $counterState;
+    // }   
 };
 
-    exports.NotFoundPage = NotFoundPage;
+    exports.NavBar = NavBar;
 
-var AboutPage = function () {
+// use Application\Components\Services\Demo\CounterState;
+var SideBar = function () {
     var $this = this;
     $base(this);
-    this.title = 'About | KOG';
+    // public CounterState $counter;
+    // public function __init(CounterState $counterState)
+    // {
+    //     $this->counter = $counterState;
+    // }   
 };
 
-    exports.AboutPage = AboutPage;
-
-var MenuBar = function () {
-    var $this = this;
-    $base(this);
-};
-
-    exports.MenuBar = MenuBar;
-
-var ContactPage = function () {
-    var $this = this;
-    $base(this);
-    this.title = 'Contact | KOG';
-};
-
-    exports.ContactPage = ContactPage;
-
-var DashboardPage = function () {
-    var $this = this;
-    $base(this);
-    this.title = 'Dashboard | KOG';
-};
-
-    exports.DashboardPage = DashboardPage;
-
-var Layout = function () {
-    var $this = this;
-    $base(this);
-    this.title = 'Viewi';
-};
-
-    exports.Layout = Layout;
-
-var CssBundle = function () {
-    var $this = this;
-    $base(this);
-    this.links = [];
-    this.link = '';
-    this.minify = false;
-    this.combine = false;
-    this.inline = false;
-    this.shakeTree = false;
-    
-    this.__version = function () {
-        var key = implode('|',$this.links);
-        key += $this.link;
-        key += $this.minify ? '1':'0';
-        key += $this.inline ? '1':'0';
-        key += $this.shakeTree ? '1':'0';
-        key += $this.combine ? '1':'0';
-        return key;
-    };
-};
-
-    exports.CssBundle = CssBundle;
-
-exports.AsyncStateManager = function () { };
+    exports.SideBar = SideBar;
 
 var OnReady = bring('OnReady');
 var ajax = bring('ajax');
@@ -395,6 +350,112 @@ var HttpClient = function () {
     }
 };
 exports.HttpClient = HttpClient;
+
+var ContactPage = function () {
+    var $this = this;
+    $base(this);
+    this.title = 'Contact | KOG';
+    this.statusMessage = "loading...";
+    var http = null;
+    // private MessageService $messageService;
+    // public function __construct(HttpClient $http)
+    // {
+    //     $this->http = $http;
+    //     // $this->messageService = $messageService;
+    // }
+    
+    this.pop = function () {
+        // $event->preventDefault();
+        // $this->http->get("https://jsonplaceholder.typicode.com/todos")
+        http.get("/api/name") .then(function (data) {
+            // use $data here
+            $this.statusMessage = 'We have received Your message and we will get to you shortly';
+        },function (error) {
+            // handle error here
+            $this.statusMessage = 'Something went wrong';
+        });
+    };
+};
+
+    exports.ContactPage = ContactPage;
+
+var Counter = function () {
+    var $this = this;
+    $base(this);
+    this.count = 0;
+    
+    this.increment = function () {
+        $this.count++;
+    };
+
+    this.decrement = function () {
+        $this.count--;
+    };
+};
+
+    exports.Counter = Counter;
+
+var DashboardPage = function () {
+    var $this = this;
+    $base(this);
+    this.title = 'Dashboard | KOG';
+    this.fruits = ["Orange", "Apple"] ;
+    this.name = "Your name";
+    
+    this.handleSubmit = function (event) {
+        event.preventDefault();
+    };
+};
+
+    exports.DashboardPage = DashboardPage;
+
+var Layout = function () {
+    var $this = this;
+    $base(this);
+    this.title = 'Viewi';
+};
+
+    exports.Layout = Layout;
+
+var NotFoundPage = function () {
+    var $this = this;
+    $base(this);
+};
+
+    exports.NotFoundPage = NotFoundPage;
+
+var PatientsPage = function () {
+    var $this = this;
+    $base(this);
+    this.title = 'Patients | KOG';
+};
+
+    exports.PatientsPage = PatientsPage;
+
+var CssBundle = function () {
+    var $this = this;
+    $base(this);
+    this.links = [];
+    this.link = '';
+    this.minify = false;
+    this.combine = false;
+    this.inline = false;
+    this.shakeTree = false;
+    
+    this.__version = function () {
+        var key = implode('|',$this.links);
+        key += $this.link;
+        key += $this.minify ? '1':'0';
+        key += $this.inline ? '1':'0';
+        key += $this.shakeTree ? '1':'0';
+        key += $this.combine ? '1':'0';
+        return key;
+    };
+};
+
+    exports.CssBundle = CssBundle;
+
+exports.AsyncStateManager = function () { };
 
 var ViewiScripts = function (httpClient, _asyncStateManager) {
     var $this = this;
