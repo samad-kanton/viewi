@@ -15,8 +15,8 @@ function RenderNotFoundPage(
 
     $slotContents[0] = 'NotFoundPage_Slot';
     $pageEngine->putInQueue($_content);
-    $pageEngine->renderComponent('Layout', [], $_component, $slotContents, [
-'title' => 'Page Not Found',
+    $pageEngine->renderComponent('BaseLayout', [], $_component, $slotContents, [
+'title' => $_component->title,
 ], ...$scope);
     $slotContents = [];
     $_content = "";

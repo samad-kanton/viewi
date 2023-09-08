@@ -1,0 +1,23 @@
+{
+    "phones": {
+        "office": "+233 362 195 587",
+        "personal": {
+            "ceo": "+233 542 795 439"
+        }
+    },
+    "emails": {
+        "contact": "contact@myshopos.com",
+        "sales": "sales@myshopos.com",
+        "support": "support@myshopos.com",
+        "legal": "legal@myshopos.com",
+        "terms": "terms@myshopos.com",
+        "privacy": "privacy@myshopos.com"
+    },
+    "social": {
+        "facebook": "https://web.facebook.com/profile.php?id=100064781571456",
+        "twitter": "https://twitter.com/MyshopOs",
+        "instagram": "https://www.instagram.com/my_shopos/",
+        "linkedin": "https://www.linkedin.com/myshopos",
+        "youtube": "https://www.youtube.com/channel/UCYyBEl0xX0yVuJ8hVPpFtDg/"
+    }
+}

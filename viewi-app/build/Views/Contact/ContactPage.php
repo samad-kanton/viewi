@@ -15,7 +15,7 @@ function RenderContactPage(
 
     $slotContents[0] = 'ContactPage_Slot';
     $pageEngine->putInQueue($_content);
-    $pageEngine->renderComponent('Layout', [], $_component, $slotContents, [
+    $pageEngine->renderComponent('PublicLayout', [], $_component, $slotContents, [
 'title' => $_component->title,
 ], ...$scope);
     $slotContents = [];

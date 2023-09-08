@@ -13,7 +13,7 @@ function RenderCssBundle_v1(
     
     $_content = '';
 
-    $_content .= '<link rel="stylesheet" href="/viewi-app/assets/lib/css/main.css">';
+    $_content .= '<link rel="stylesheet" href="/viewi-app/assets/static/css/main.css">';
     return $_content;
    
 }

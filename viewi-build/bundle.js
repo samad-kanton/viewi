@@ -3,28 +3,6 @@
  * (c) 2020-now Ivan Voitovych
  * Released under the MIT License.
  */
-function implode (glue, pieces) {
-  var i = ''
-  var retVal = ''
-  var tGlue = ''
-  if (arguments.length === 1) {
-    pieces = glue
-    glue = ''
-  }
-  if (typeof pieces === 'object') {
-    if (Object.prototype.toString.call(pieces) === '[object Array]') {
-      return pieces.join(glue)
-    }
-    for (i in pieces) {
-      retVal += tGlue + pieces[i]
-      tGlue = glue
-    }
-    return retVal
-  }
-  return pieces
-}
-
-
 function json_encode (mixedVal) { 
   var $global = (typeof window !== 'undefined' ? window : global)
   $global.$locutus = $global.$locutus || {}
@@ -141,34 +119,204 @@ function json_encode (mixedVal) {
 }
 
 
+function implode (glue, pieces) {
+  var i = ''
+  var retVal = ''
+  var tGlue = ''
+  if (arguments.length === 1) {
+    pieces = glue
+    glue = ''
+  }
+  if (typeof pieces === 'object') {
+    if (Object.prototype.toString.call(pieces) === '[object Array]') {
+      return pieces.join(glue)
+    }
+    for (i in pieces) {
+      retVal += tGlue + pieces[i]
+      tGlue = glue
+    }
+    return retVal
+  }
+  return pieces
+}
+
+
+function date (format, timestamp) {
+  var jsdate, f
+  var txtWords = [
+    'Sun', 'Mon', 'Tues', 'Wednes', 'Thurs', 'Fri', 'Satur',
+    'January', 'February', 'March', 'April', 'May', 'June',
+    'July', 'August', 'September', 'October', 'November', 'December'
+  ]
+  var formatChr = /\\?(.?)/gi
+  var formatChrCb = function (t, s) {
+    return f[t] ? f[t]() : s
+  }
+  var _pad = function (n, c) {
+    n = String(n)
+    while (n.length < c) {
+      n = '0' + n
+    }
+    return n
+  }
+  f = {
+    d: function () {
+      return _pad(f.j(), 2)
+    },
+    D: function () {
+      return f.l()
+        .slice(0, 3)
+    },
+    j: function () {
+      return jsdate.getDate()
+    },
+    l: function () {
+      return txtWords[f.w()] + 'day'
+    },
+    N: function () {
+      return f.w() || 7
+    },
+    S: function () {
+      var j = f.j()
+      var i = j % 10
+      if (i <= 3 && parseInt((j % 100) / 10, 10) === 1) {
+        i = 0
+      }
+      return ['st', 'nd', 'rd'][i - 1] || 'th'
+    },
+    w: function () {
+      return jsdate.getDay()
+    },
+    z: function () {
+      var a = new Date(f.Y(), f.n() - 1, f.j())
+      var b = new Date(f.Y(), 0, 1)
+      return Math.round((a - b) / 864e5)
+    },
+    W: function () {
+      var a = new Date(f.Y(), f.n() - 1, f.j() - f.N() + 3)
+      var b = new Date(a.getFullYear(), 0, 4)
+      return _pad(1 + Math.round((a - b) / 864e5 / 7), 2)
+    },
+    F: function () {
+      return txtWords[6 + f.n()]
+    },
+    m: function () {
+      return _pad(f.n(), 2)
+    },
+    M: function () {
+      return f.F()
+        .slice(0, 3)
+    },
+    n: function () {
+      return jsdate.getMonth() + 1
+    },
+    t: function () {
+      return (new Date(f.Y(), f.n(), 0))
+        .getDate()
+    },
+    L: function () {
+      var j = f.Y()
+      return j % 4 === 0 & j % 100 !== 0 | j % 400 === 0
+    },
+    o: function () {
+      var n = f.n()
+      var W = f.W()
+      var Y = f.Y()
+      return Y + (n === 12 && W < 9 ? 1 : n === 1 && W > 9 ? -1 : 0)
+    },
+    Y: function () {
+      return jsdate.getFullYear()
+    },
+    y: function () {
+      return f.Y()
+        .toString()
+        .slice(-2)
+    },
+    a: function () {
+      return jsdate.getHours() > 11 ? 'pm' : 'am'
+    },
+    A: function () {
+      return f.a()
+        .toUpperCase()
+    },
+    B: function () {
+      var H = jsdate.getUTCHours() * 36e2
+      var i = jsdate.getUTCMinutes() * 60
+      var s = jsdate.getUTCSeconds()
+      return _pad(Math.floor((H + i + s + 36e2) / 86.4) % 1e3, 3)
+    },
+    g: function () {
+      return f.G() % 12 || 12
+    },
+    G: function () {
+      return jsdate.getHours()
+    },
+    h: function () {
+      return _pad(f.g(), 2)
+    },
+    H: function () {
+      return _pad(f.G(), 2)
+    },
+    i: function () {
+      return _pad(jsdate.getMinutes(), 2)
+    },
+    s: function () {
+      return _pad(jsdate.getSeconds(), 2)
+    },
+    u: function () {
+      return _pad(jsdate.getMilliseconds() * 1000, 6)
+    },
+    e: function () {
+      var msg = 'Not supported (see source code of date() for timezone on how to add support)'
+      throw new Error(msg)
+    },
+    I: function () {
+      var a = new Date(f.Y(), 0)
+      var c = Date.UTC(f.Y(), 0)
+      var b = new Date(f.Y(), 6)
+      var d = Date.UTC(f.Y(), 6)
+      return ((a - c) !== (b - d)) ? 1 : 0
+    },
+    O: function () {
+      var tzo = jsdate.getTimezoneOffset()
+      var a = Math.abs(tzo)
+      return (tzo > 0 ? '-' : '+') + _pad(Math.floor(a / 60) * 100 + a % 60, 4)
+    },
+    P: function () {
+      var O = f.O()
+      return (O.substr(0, 3) + ':' + O.substr(3, 2))
+    },
+    T: function () {
+      return 'UTC'
+    },
+    Z: function () {
+      return -jsdate.getTimezoneOffset() * 60
+    },
+    c: function () {
+      return 'Y-m-d\\TH:i:sP'.replace(formatChr, formatChrCb)
+    },
+    r: function () {
+      return 'D, d M Y H:i:s O'.replace(formatChr, formatChrCb)
+    },
+    U: function () {
+      return jsdate / 1000 | 0
+    }
+  }
+  var _date = function (format, timestamp) {
+    jsdate = (timestamp === undefined ? new Date() 
+      : (timestamp instanceof Date) ? new Date(timestamp) 
+      : new Date(timestamp * 1000) 
+    )
+    return format.replace(formatChr, formatChrCb)
+  }
+  return _date(format, timestamp)
+}
+
+
 var viewiBundleEntry = function (exports, bring) {
     var $base = bring('$base');
     var notify = bring('notify');
-// use Application\Components\Services\Demo\CounterState;
-var NavBar = function () {
-    var $this = this;
-    $base(this);
-    // public CounterState $counter;
-    // public function __init(CounterState $counterState)
-    // {
-    //     $this->counter = $counterState;
-    // }   
-};
-
-    exports.NavBar = NavBar;
-
-// use Application\Components\Services\Demo\CounterState;
-var SideBar = function () {
-    var $this = this;
-    $base(this);
-    // public CounterState $counter;
-    // public function __init(CounterState $counterState)
-    // {
-    //     $this->counter = $counterState;
-    // }   
-};
-
-    exports.SideBar = SideBar;
+exports.AsyncStateManager = function () { };
 
 var OnReady = bring('OnReady');
 var ajax = bring('ajax');
@@ -351,25 +499,365 @@ var HttpClient = function () {
 };
 exports.HttpClient = HttpClient;
 
+/**
+ * @var Viewi app
+ */
+var app = bring('viewiApp');
+var ClientRouter = function () {
+    this.navigateBack = function () {
+        history.back();
+    };
+
+    this.navigate = function (url) {
+        /**
+         * @var Viewi app
+         */
+        app.go(url, true);
+    }
+
+    this.getUrl = function () {
+        return location.pathname;
+    }
+};
+exports.ClientRouter = ClientRouter;
+
+
+var CounterState = function () {
+    var $this = this;
+    this.count = 0;
+    
+    this.increment = function () {
+        $this.count++;
+    };
+
+    this.decrement = function () {
+        $this.count--;
+    };
+};
+
+    exports.CounterState = CounterState;
+
+var ForgotPasswordPage = function () {
+    var $this = this;
+    $base(this);
+    this.title = "Reset Password";
+    var http = null;
+    var router = null;
+    this.counter = null;
+
+    this.__init = function (_http, clientRouter, counterState) {
+        http = _http;
+        router = clientRouter;
+        $this.counter = counterState;
+    };
+
+    this.save = function (event) {
+        event.preventDefault();
+        // kanton404@gmail.com
+        http.get("/api/name") .then(function (data) {
+            console.log(data);
+            // if (!$this->Id) {
+            router.navigate("/sources/edit/" + data.name);
+            // }
+        },function (error) {
+            console.log(error);
+        });
+    };
+};
+
+    exports.ForgotPasswordPage = ForgotPasswordPage;
+
+var InputState = function () {
+    var $this = this;
+    this.states = {
+        n: 2,
+        label: {
+            default: 'text-gray-900 dark:text-white',
+            error: 'text-red-700 dark:text-red-500',
+            success: 'text-green-700 dark:text-green-500'
+        } ,
+        input: {
+            default: 'bg-gray-50 border border-gray-300 text-gray-900 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white',
+            error: 'bg-red-50 border-red-500 text-red-900 placeholder-red-700 focus:ring-red-500 focus:border-red-500 dark:bg-red-100 dark:border-red-400',
+            success: 'bg-green-50 border-green-500 text-green-900 placeholder-green-700 focus:ring-green-500 focus:border-green-500 dark:bg-green-100 dark:border-green-400'
+        } 
+    } ;
+};
+
+    exports.InputState = InputState;
+
+var DomHelper = function () {
+    var $this = this;
+    
+
+};
+
+DomHelper.getDocument = function () {
+    
+        return document;;
+    // nothing on server-side
+    return null;
+};
+
+
+DomHelper.getWindow = function () {
+    
+        return window;;
+    // nothing on server-side
+    return null;
+};
+
+
+    exports.DomHelper = DomHelper;
+
+var SignInPage = function () {
+    var $this = this;
+    $base(this);
+    this.title = "Signin to MyshopOS";
+    this.email = '';
+    this.password = '';
+    this.resp = '';
+    this.isSubmitted = null;
+    this.validEmail = null;
+    this.inputStates = null;
+    var http = null;
+    var router = null;
+    // function __init(HttpClient $http, ClientRouter $clientRouter, UIClass $uiClassState){
+
+    this.__init = function (_http, clientRouter, inputState) {
+        http = _http;
+        router = clientRouter;
+        // $this->uiClass = $uiClassState;
+        $this.inputStates = inputState;
+    };
+
+    this.login = function (event) {
+        event.preventDefault();
+        var document = DomHelper.getWindow();
+        // echo $email->value . ' ' . $password->value;
+        http.post('/api/login',{ email: $this.email, password: $this.password } ) .then(function (resp) {
+            console.log("Resp: " + json_encode(resp,true));
+            // $this->isSubmitted = 'true';
+            $this.validEmail = resp.email;
+            $this.validPassword = resp.password;
+            // $this->isValid = ['email' => $resp->email, 'password' => $resp->password];
+            console.log($this.validEmail);
+            // echo count($this->valid);
+            // $this->resp = $resp;
+            // if (!$this->Id) {
+            // $this->router->navigate("/sources/edit/{$data->name}");
+            // }
+        },function (error) {
+            console.log(error);
+        });
+        // kanton404@gmail.com
+    };
+
+    this.valid = function (field) {
+        return field;
+    };
+};
+
+    exports.SignInPage = SignInPage;
+
+var SignUpPage = function () {
+    var $this = this;
+    $base(this);
+    this.title = "Create a MyshopOS account";
+    this.countries = [];
+    this.fruits = ["Orange", "Apple"] ;
+    var http = null;
+    var router = null;
+
+    this.__init = function (_http, _router) {
+        http = _http;
+        router = _router;
+    };
+
+    this.__rendered = function () {
+        // click outside
+        // $document = DomHelper::getDocument();
+        // if ($document !== null) {
+        //     $document->addEventListener('click', $this->onClickOutside, 'hello');
+        // }
+        // // resize event
+        // // $document = DomHelper::getWindow();
+        // if ($document !== null) {
+        //     $document->addEventListener('resize', $this->onResize, ['passive' => true]);
+        // }
+        // echo DomHelper::getDocument()->location;
+        http.get('/viewi-app/assets/static/data/countries.json') .then(function (data) {
+            console.log(data);
+            // $this->countries = json_decode(json_encode($data));
+            $this.countries = (data);
+        },function (error) {
+            console.log(error);
+        });
+    };
+
+    this.popCountries = function () {
+        // $this->http->get('/viewi-app/assets/static/js/countries.json')
+        // ->then(function($data){
+        //     echo $data;
+        // }, function($error){
+        //     echo $error;
+        // });
+        // echo file_get_contents('/viewi-app/assets/static/js/countries.json');
+        // <<<'javascript'
+        //     const resp = fetch('/viewi-app/assets/static/js/countries.json')
+        //     .then(resp => resp.ok && resp.json())
+        //     .then(data => {
+        //         console.log(data);
+        //         $onClickOutside = "Hello";
+        //         document.querySelector('#country').value = "";
+        //     })
+        //     javascript;        
+    };
+
+    this.handleSubmit = function (event) {
+        event.preventDefault();
+    };
+};
+
+    exports.SignUpPage = SignUpPage;
+
+var AppBar = function () {
+    var $this = this;
+    $base(this);
+    // public CounterState $counter;
+    // public function __init(CounterState $counterState)
+    // {
+    //     $this->counter = $counterState;
+    // }   
+};
+
+    exports.AppBar = AppBar;
+
+var AppUpdateBanner = function () {
+    var $this = this;
+    $base(this);
+};
+
+    exports.AppUpdateBanner = AppUpdateBanner;
+
+var CookieNoticeBanner = function () {
+    var $this = this;
+    $base(this);
+};
+
+    exports.CookieNoticeBanner = CookieNoticeBanner;
+
+var MobileApp = function () {
+    var $this = this;
+    $base(this);
+    // public CounterState $counter;
+    // public function __init(CounterState $counterState)
+    // {
+    //     $this->counter = $counterState;
+    // }   
+};
+
+    exports.MobileApp = MobileApp;
+
+var CoreValues = function () {
+    var $this = this;
+    $base(this);
+    // public CounterState $counter;
+    // public function __init(CounterState $counterState)
+    // {
+    //     $this->counter = $counterState;
+    // }   
+};
+
+
+this.getFeatures = function () {
+    console.log($this.features);
+    return $this.features;
+};
+    exports.CoreValues = CoreValues;
+
+var Footer = function () {
+    var $this = this;
+    $base(this);
+    // public CounterState $counter;
+    // public function __init(CounterState $counterState)
+    // {
+    //     $this->counter = $counterState;
+    // }   
+};
+
+    exports.Footer = Footer;
+
+var Hero = function () {
+    var $this = this;
+    $base(this);
+    // public CounterState $counter;
+    // public function __init(CounterState $counterState)
+    // {
+    //     $this->counter = $counterState;
+    // }   
+};
+
+    exports.Hero = Hero;
+
+// use Application\Components\Services\Demo\CounterState;
+var NavBar = function () {
+    var $this = this;
+    $base(this);
+    // public CounterState $counter;
+    this.currentUrl = '';
+    // public function __init(CounterState $counterState)
+    // {
+    //     $this->counter = $counterState;
+    // }   
+};
+
+    exports.NavBar = NavBar;
+
+// use Application\Components\Services\Demo\CounterState;
+var SideBar = function () {
+    var $this = this;
+    $base(this);
+    // public CounterState $counter;
+    // public function __init(CounterState $counterState)
+    // {
+    //     $this->counter = $counterState;
+    // }   
+};
+
+    exports.SideBar = SideBar;
+
+// use Application\Components\Services\Demo\CounterState;
+var Testimonial = function () {
+    var $this = this;
+    $base(this);
+    // public CounterState $counter;
+    // public function __init(CounterState $counterState)
+    // {
+    //     $this->counter = $counterState;
+    // }   
+};
+
+    exports.Testimonial = Testimonial;
+
 var ContactPage = function () {
     var $this = this;
     $base(this);
     this.title = 'Contact | KOG';
     this.statusMessage = "loading...";
+    this.data = "";
     var http = null;
-    // private MessageService $messageService;
-    // public function __construct(HttpClient $http)
-    // {
-    //     $this->http = $http;
-    //     // $this->messageService = $messageService;
-    // }
-    
+
+    this.__init = function (_http) {
+        http = _http;
+    };
+
     this.pop = function () {
-        // $event->preventDefault();
         // $this->http->get("https://jsonplaceholder.typicode.com/todos")
-        http.get("/api/name") .then(function (data) {
+        http.get("/api/name") .then(function (resp) {
             // use $data here
             $this.statusMessage = 'We have received Your message and we will get to you shortly';
+            $this.data = resp['name'] ;
         },function (error) {
             // handle error here
             $this.statusMessage = 'Something went wrong';
@@ -395,42 +883,137 @@ var Counter = function () {
 
     exports.Counter = Counter;
 
-var DashboardPage = function () {
+var FeaturesPage = function () {
     var $this = this;
     $base(this);
-    this.title = 'Dashboard | KOG';
-    this.fruits = ["Orange", "Apple"] ;
-    this.name = "Your name";
+    this.title = 'Features';
+    this.features = null;
+};
+
+    exports.FeaturesPage = FeaturesPage;
+
+var HardwarePage = function () {
+    var $this = this;
+    $base(this);
+    this.title = 'Hardware';
     
     this.handleSubmit = function (event) {
         event.preventDefault();
     };
 };
 
-    exports.DashboardPage = DashboardPage;
+    exports.HardwarePage = HardwarePage;
 
-var Layout = function () {
+// use Viewi\Common\ClientRouter;
+var HomePage = function () {
+    var $this = this;
+    $base(this);
+    this.title = 'Smart Billing Software';
+    // public string $currentUrl = '';
+    // public array $fruits = ["Orange", "Apple"];
+    // public string $name = "Your name";
+    // public array $posts = [
+    //     'Viewi is awesome!',
+    //     'Lorem ipsum dolor sit amet'
+    // ];
+    // private ClientRouter $clientRouter;
+    // function __init(ClientRouter $clientRouter) {
+    //     $this->clientRouter = $clientRouter;
+    // }
+
+    this.__mounted = function () {
+        // $currentUrl = $this->clientRouter->getUrl();
+        // $this->clientRouter->navigate("/signin");
+        // $isActive = $myurl == $currentUrl;
+    };
+
+    this.handleSubmit = function (event) {
+        event.preventDefault();
+    };
+};
+
+    exports.HomePage = HomePage;
+
+var BaseLayout = function () {
     var $this = this;
     $base(this);
     this.title = 'Viewi';
 };
 
-    exports.Layout = Layout;
+    exports.BaseLayout = BaseLayout;
+
+var PublicLayout = function () {
+    var $this = this;
+    $base(this);
+    this.title = '';
+    // function __construct(ClientRouter $clientRouter)
+    // {
+    //     $this->clientRouter = $clientRouter;
+    // }
+    // function __mounted() {
+    //     $currentUrl = $this->clientRouter->getUrl();
+    //     // $isActive = $myurl === $currentUrl;
+    // }
+};
+
+    exports.PublicLayout = PublicLayout;
 
 var NotFoundPage = function () {
     var $this = this;
     $base(this);
+    this.title = "Page Not Found";
 };
 
     exports.NotFoundPage = NotFoundPage;
 
-var PatientsPage = function () {
+var Post = function () {
     var $this = this;
     $base(this);
-    this.title = 'Patients | KOG';
+    this.content = null;
 };
 
-    exports.PatientsPage = PatientsPage;
+    exports.Post = Post;
+
+var PricingPage = function () {
+    var $this = this;
+    $base(this);
+    this.title = 'Pricing';
+    // public array $fruits = ["Orange", "Apple"];
+    // public string $name = "Your name";
+    this.currentUrl = '';
+    this.isActive = '';
+    this.myurl = null;
+    var clientRouter = null;
+
+    this.__init = function (_clientRouter) {
+        clientRouter = _clientRouter;
+    };
+
+    this.__mounted = function () {
+        var currentUrl_0 = clientRouter.getUrl();
+        // $isActive = $myurl == $currentUrl;
+    };
+
+    this.handleSubmit = function (event) {
+        event.preventDefault();
+    };
+};
+
+    exports.PricingPage = PricingPage;
+
+var ServicesPage = function () {
+    var $this = this;
+    $base(this);
+    this.title = 'Services';
+    // public array $fruits = ["Orange", "Apple"];
+    // public string $name = "Your name";
+    
+    this.handleSubmit = function (event) {
+        event.preventDefault();
+    };
+};
+
+    exports.ServicesPage = ServicesPage;
 
 var CssBundle = function () {
     var $this = this;
@@ -454,8 +1037,6 @@ var CssBundle = function () {
 };
 
     exports.CssBundle = CssBundle;
-
-exports.AsyncStateManager = function () { };
 
 var ViewiScripts = function (httpClient, _asyncStateManager) {
     var $this = this;

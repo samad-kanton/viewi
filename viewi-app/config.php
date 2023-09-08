@@ -8,5 +8,6 @@ return [
     PageEngine::PUBLIC_ROOT_DIR => __DIR__ . '/../',
     PageEngine::DEV_MODE => true,
     PageEngine::RETURN_OUTPUT => true,
-    PageEngine::COMBINE_JS => true
+    PageEngine::COMBINE_JS => true,
+    PageEngine::MINIFY => !true
 ];

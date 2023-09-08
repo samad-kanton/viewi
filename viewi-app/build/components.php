@@ -7,6 +7,395 @@ function ReadComponentsInfo(PageEngine $pageEngine)
     $pageEngine->setStartups(array (
 ));
 $pageEngine->setComponentsInfo(array (
+  'HttpClient' => 
+  array (
+    'Name' => 'HttpClient',
+    'Namespace' => 'Viewi\\Common',
+    'FullPath' => 'C:\\Users\\kanto\\Desktop\\viewi\\myshopos\\vendor\\viewi\\viewi\\src\\Viewi\\Common\\HttpClient.php',
+    'IsComponent' => false,
+    'HasInit' => false,
+    'HasMounted' => false,
+    'HasBeforeMount' => false,
+    'Relative' => false,
+    'Dependencies' => 
+    array (
+      'asyncStateManager' => 
+      array (
+        'name' => 'AsyncStateManager',
+      ),
+    ),
+    'Instance' => NULL,
+  ),
+  'AsyncStateManager' => 
+  array (
+    'Name' => 'AsyncStateManager',
+    'Namespace' => 'Viewi\\Components\\Services',
+    'FullPath' => 'C:\\Users\\kanto\\Desktop\\viewi\\myshopos\\vendor\\viewi\\viewi\\src\\Viewi\\Components\\Services\\AsyncStateManager.php',
+    'IsComponent' => false,
+    'HasInit' => false,
+    'HasMounted' => false,
+    'HasBeforeMount' => false,
+    'Relative' => false,
+    'Instance' => 
+    array (
+    ),
+  ),
+  'ClientRouter' => 
+  array (
+    'Name' => 'ClientRouter',
+    'Namespace' => 'Viewi\\Common',
+    'FullPath' => 'C:\\Users\\kanto\\Desktop\\viewi\\myshopos\\vendor\\viewi\\viewi\\src\\Viewi\\Common\\ClientRouter.php',
+    'IsComponent' => false,
+    'HasInit' => false,
+    'HasMounted' => false,
+    'HasBeforeMount' => false,
+    'Relative' => false,
+    'Dependencies' => 
+    array (
+      'httpContext' => 
+      array (
+        'name' => 'IHttpContext',
+      ),
+    ),
+    'Instance' => NULL,
+  ),
+  'CounterState' => 
+  array (
+    'Name' => 'CounterState',
+    'Namespace' => 'Components\\Services',
+    'FullPath' => '\\Services\\CounterState.php',
+    'IsComponent' => false,
+    'HasInit' => false,
+    'HasMounted' => false,
+    'HasBeforeMount' => false,
+    'Relative' => true,
+    'Instance' => NULL,
+  ),
+  'ForgotPasswordPage' => 
+  array (
+    'Name' => 'ForgotPasswordPage',
+    'Namespace' => 'Components\\Views\\Auth\\ForgotPassword',
+    'ComponentName' => 'ForgotPasswordPage',
+    'Tag' => 'ForgotPasswordPage',
+    'FullPath' => '\\Views\\Auth\\ForgotPassword\\ForgotPasswordPage.php',
+    'TemplatePath' => '\\Views\\Auth\\ForgotPassword\\ForgotPasswordPage.html',
+    'BuildPath' => '\\Views\\Auth\\ForgotPassword\\ForgotPasswordPage.php',
+    'RenderFunction' => 'RenderForgotPasswordPage',
+    'IsComponent' => true,
+    'HasInit' => true,
+    'HasMounted' => false,
+    'HasBeforeMount' => false,
+    'HasVersions' => false,
+    'Relative' => true,
+    'Inputs' => 
+    array (
+      'title' => true,
+      'counter' => true,
+      '__id' => true,
+      '_props' => true,
+      '_refs' => true,
+      '_element' => true,
+      '_slots' => true,
+    ),
+    'Dependencies' => 
+    array (
+      'http' => 
+      array (
+        'name' => 'HttpClient',
+      ),
+      'clientRouter' => 
+      array (
+        'name' => 'ClientRouter',
+      ),
+      'counterState' => 
+      array (
+        'name' => 'CounterState',
+      ),
+    ),
+    'Instance' => NULL,
+  ),
+  'InputState' => 
+  array (
+    'Name' => 'InputState',
+    'Namespace' => 'Components\\Services',
+    'FullPath' => '\\Services\\InputState.php',
+    'IsComponent' => false,
+    'HasInit' => false,
+    'HasMounted' => false,
+    'HasBeforeMount' => false,
+    'Relative' => true,
+    'Instance' => NULL,
+  ),
+  'SignInPage' => 
+  array (
+    'Name' => 'SignInPage',
+    'Namespace' => 'Components\\Views\\Auth\\SignIn',
+    'ComponentName' => 'SignInPage',
+    'Tag' => 'SignInPage',
+    'FullPath' => '\\Views\\Auth\\SignIn\\SignInPage.php',
+    'TemplatePath' => '\\Views\\Auth\\SignIn\\SignInPage.html',
+    'BuildPath' => '\\Views\\Auth\\SignIn\\SignInPage.php',
+    'RenderFunction' => 'RenderSignInPage',
+    'IsComponent' => true,
+    'HasInit' => true,
+    'HasMounted' => false,
+    'HasBeforeMount' => false,
+    'HasVersions' => false,
+    'Relative' => true,
+    'Inputs' => 
+    array (
+      'title' => true,
+      'email' => true,
+      'password' => true,
+      'resp' => true,
+      'isSubmitted' => true,
+      'validEmail' => true,
+      'inputStates' => true,
+      '__id' => true,
+      '_props' => true,
+      '_refs' => true,
+      '_element' => true,
+      '_slots' => true,
+    ),
+    'Dependencies' => 
+    array (
+      'http' => 
+      array (
+        'name' => 'HttpClient',
+      ),
+      'clientRouter' => 
+      array (
+        'name' => 'ClientRouter',
+      ),
+      'inputState' => 
+      array (
+        'name' => 'InputState',
+      ),
+    ),
+    'Instance' => NULL,
+  ),
+  'SignUpPage' => 
+  array (
+    'Name' => 'SignUpPage',
+    'Namespace' => 'Components\\Views\\Auth\\SignUp',
+    'ComponentName' => 'SignUpPage',
+    'Tag' => 'SignUpPage',
+    'FullPath' => '\\Views\\Auth\\SignUp\\SignUpPage.php',
+    'TemplatePath' => '\\Views\\Auth\\SignUp\\SignUpPage.html',
+    'BuildPath' => '\\Views\\Auth\\SignUp\\SignUpPage.php',
+    'RenderFunction' => 'RenderSignUpPage',
+    'IsComponent' => true,
+    'HasInit' => true,
+    'HasMounted' => false,
+    'HasBeforeMount' => false,
+    'HasVersions' => false,
+    'Relative' => true,
+    'Inputs' => 
+    array (
+      'title' => true,
+      'countries' => true,
+      'fruits' => true,
+      '__id' => true,
+      '_props' => true,
+      '_refs' => true,
+      '_element' => true,
+      '_slots' => true,
+    ),
+    'Dependencies' => 
+    array (
+      'http' => 
+      array (
+        'name' => 'HttpClient',
+      ),
+      'router' => 
+      array (
+        'name' => 'ClientRouter',
+      ),
+    ),
+    'Instance' => NULL,
+  ),
+  'AppBar' => 
+  array (
+    'Name' => 'AppBar',
+    'Namespace' => 'Components\\Views\\Common',
+    'ComponentName' => 'AppBar',
+    'Tag' => 'AppBar',
+    'FullPath' => '\\Views\\Common\\AppBar\\AppBar.php',
+    'TemplatePath' => '\\Views\\Common\\AppBar\\AppBar.html',
+    'BuildPath' => '\\Views\\Common\\AppBar\\AppBar.php',
+    'RenderFunction' => 'RenderAppBar',
+    'IsComponent' => true,
+    'HasInit' => false,
+    'HasMounted' => false,
+    'HasBeforeMount' => false,
+    'HasVersions' => false,
+    'Relative' => true,
+    'Inputs' => 
+    array (
+      '__id' => true,
+      '_props' => true,
+      '_refs' => true,
+      '_element' => true,
+      '_slots' => true,
+    ),
+    'Instance' => NULL,
+  ),
+  'AppUpdateBanner' => 
+  array (
+    'Name' => 'AppUpdateBanner',
+    'Namespace' => '',
+    'ComponentName' => 'AppUpdateBanner',
+    'Tag' => 'AppUpdateBanner',
+    'FullPath' => '\\Views\\Common\\Banners\\AppUpdateBanner\\AppUpdateBanner.php',
+    'TemplatePath' => '\\Views\\Common\\Banners\\AppUpdateBanner\\AppUpdateBanner.html',
+    'BuildPath' => '\\Views\\Common\\Banners\\AppUpdateBanner\\AppUpdateBanner.php',
+    'RenderFunction' => 'RenderAppUpdateBanner',
+    'IsComponent' => true,
+    'HasInit' => false,
+    'HasMounted' => false,
+    'HasBeforeMount' => false,
+    'HasVersions' => false,
+    'Relative' => true,
+    'Inputs' => 
+    array (
+      '__id' => true,
+      '_props' => true,
+      '_refs' => true,
+      '_element' => true,
+      '_slots' => true,
+    ),
+    'Instance' => NULL,
+  ),
+  'CookieNoticeBanner' => 
+  array (
+    'Name' => 'CookieNoticeBanner',
+    'Namespace' => '',
+    'ComponentName' => 'CookieNoticeBanner',
+    'Tag' => 'CookieNoticeBanner',
+    'FullPath' => '\\Views\\Common\\Banners\\CookiePolicyBanner\\CookieNoticeBanner.php',
+    'TemplatePath' => '\\Views\\Common\\Banners\\CookiePolicyBanner\\CookieNoticeBanner.html',
+    'BuildPath' => '\\Views\\Common\\Banners\\CookiePolicyBanner\\CookieNoticeBanner.php',
+    'RenderFunction' => 'RenderCookieNoticeBanner',
+    'IsComponent' => true,
+    'HasInit' => false,
+    'HasMounted' => false,
+    'HasBeforeMount' => false,
+    'HasVersions' => false,
+    'Relative' => true,
+    'Inputs' => 
+    array (
+      '__id' => true,
+      '_props' => true,
+      '_refs' => true,
+      '_element' => true,
+      '_slots' => true,
+    ),
+    'Instance' => NULL,
+  ),
+  'MobileApp' => 
+  array (
+    'Name' => 'MobileApp',
+    'Namespace' => 'Components\\Views\\Common\\CTA',
+    'ComponentName' => 'MobileApp',
+    'Tag' => 'MobileApp',
+    'FullPath' => '\\Views\\Common\\CTA\\MobileApps\\MobileApp.php',
+    'TemplatePath' => '\\Views\\Common\\CTA\\MobileApps\\MobileApp.html',
+    'BuildPath' => '\\Views\\Common\\CTA\\MobileApps\\MobileApp.php',
+    'RenderFunction' => 'RenderMobileApp',
+    'IsComponent' => true,
+    'HasInit' => false,
+    'HasMounted' => false,
+    'HasBeforeMount' => false,
+    'HasVersions' => false,
+    'Relative' => true,
+    'Inputs' => 
+    array (
+      '__id' => true,
+      '_props' => true,
+      '_refs' => true,
+      '_element' => true,
+      '_slots' => true,
+    ),
+    'Instance' => NULL,
+  ),
+  'CoreValues' => 
+  array (
+    'Name' => 'CoreValues',
+    'Namespace' => 'Components\\Views\\Common',
+    'ComponentName' => 'CoreValues',
+    'Tag' => 'CoreValues',
+    'FullPath' => '\\Views\\Common\\CoreValues\\CoreValues.php',
+    'TemplatePath' => '\\Views\\Common\\CoreValues\\CoreValues.html',
+    'BuildPath' => '\\Views\\Common\\CoreValues\\CoreValues.php',
+    'RenderFunction' => 'RenderCoreValues',
+    'IsComponent' => true,
+    'HasInit' => false,
+    'HasMounted' => false,
+    'HasBeforeMount' => false,
+    'HasVersions' => false,
+    'Relative' => true,
+    'Inputs' => 
+    array (
+      '__id' => true,
+      '_props' => true,
+      '_refs' => true,
+      '_element' => true,
+      '_slots' => true,
+    ),
+    'Instance' => NULL,
+  ),
+  'Footer' => 
+  array (
+    'Name' => 'Footer',
+    'Namespace' => 'Components\\Views\\Common',
+    'ComponentName' => 'Footer',
+    'Tag' => 'Footer',
+    'FullPath' => '\\Views\\Common\\Footer\\Footer.php',
+    'TemplatePath' => '\\Views\\Common\\Footer\\Footer.html',
+    'BuildPath' => '\\Views\\Common\\Footer\\Footer.php',
+    'RenderFunction' => 'RenderFooter',
+    'IsComponent' => true,
+    'HasInit' => false,
+    'HasMounted' => false,
+    'HasBeforeMount' => false,
+    'HasVersions' => false,
+    'Relative' => true,
+    'Inputs' => 
+    array (
+      '__id' => true,
+      '_props' => true,
+      '_refs' => true,
+      '_element' => true,
+      '_slots' => true,
+    ),
+    'Instance' => NULL,
+  ),
+  'Hero' => 
+  array (
+    'Name' => 'Hero',
+    'Namespace' => 'Components\\Views\\Common',
+    'ComponentName' => 'Hero',
+    'Tag' => 'Hero',
+    'FullPath' => '\\Views\\Common\\Hero\\Hero.php',
+    'TemplatePath' => '\\Views\\Common\\Hero\\Hero.html',
+    'BuildPath' => '\\Views\\Common\\Hero\\Hero.php',
+    'RenderFunction' => 'RenderHero',
+    'IsComponent' => true,
+    'HasInit' => false,
+    'HasMounted' => false,
+    'HasBeforeMount' => false,
+    'HasVersions' => false,
+    'Relative' => true,
+    'Inputs' => 
+    array (
+      '__id' => true,
+      '_props' => true,
+      '_refs' => true,
+      '_element' => true,
+      '_slots' => true,
+    ),
+    'Instance' => NULL,
+  ),
   'NavBar' => 
   array (
     'Name' => 'NavBar',
@@ -25,6 +414,7 @@ $pageEngine->setComponentsInfo(array (
     'Relative' => true,
     'Inputs' => 
     array (
+      'currentUrl' => true,
       '__id' => true,
       '_props' => true,
       '_refs' => true,
@@ -59,6 +449,32 @@ $pageEngine->setComponentsInfo(array (
     ),
     'Instance' => NULL,
   ),
+  'Testimonial' => 
+  array (
+    'Name' => 'Testimonial',
+    'Namespace' => 'Components\\Views\\Common',
+    'ComponentName' => 'Testimonial',
+    'Tag' => 'Testimonial',
+    'FullPath' => '\\Views\\Common\\Testimonial\\Testimonial.php',
+    'TemplatePath' => '\\Views\\Common\\Testimonial\\Testimonial.html',
+    'BuildPath' => '\\Views\\Common\\Testimonial\\Testimonial.php',
+    'RenderFunction' => 'RenderTestimonial',
+    'IsComponent' => true,
+    'HasInit' => false,
+    'HasMounted' => false,
+    'HasBeforeMount' => false,
+    'HasVersions' => false,
+    'Relative' => true,
+    'Inputs' => 
+    array (
+      '__id' => true,
+      '_props' => true,
+      '_refs' => true,
+      '_element' => true,
+      '_slots' => true,
+    ),
+    'Instance' => NULL,
+  ),
   'ContactPage' => 
   array (
     'Name' => 'ContactPage',
@@ -70,7 +486,7 @@ $pageEngine->setComponentsInfo(array (
     'BuildPath' => '\\Views\\Contact\\ContactPage.php',
     'RenderFunction' => 'RenderContactPage',
     'IsComponent' => true,
-    'HasInit' => false,
+    'HasInit' => true,
     'HasMounted' => false,
     'HasBeforeMount' => false,
     'HasVersions' => false,
@@ -79,11 +495,19 @@ $pageEngine->setComponentsInfo(array (
     array (
       'title' => true,
       'statusMessage' => true,
+      'data' => true,
       '__id' => true,
       '_props' => true,
       '_refs' => true,
       '_element' => true,
       '_slots' => true,
+    ),
+    'Dependencies' => 
+    array (
+      'http' => 
+      array (
+        'name' => 'HttpClient',
+      ),
     ),
     'Instance' => NULL,
   ),
@@ -114,16 +538,16 @@ $pageEngine->setComponentsInfo(array (
     ),
     'Instance' => NULL,
   ),
-  'DashboardPage' => 
+  'FeaturesPage' => 
   array (
-    'Name' => 'DashboardPage',
-    'Namespace' => 'Components\\Views\\Dashboard',
-    'ComponentName' => 'DashboardPage',
-    'Tag' => 'DashboardPage',
-    'FullPath' => '\\Views\\Dashboard\\DashboardPage.php',
-    'TemplatePath' => '\\Views\\Dashboard\\DashboardPage.html',
-    'BuildPath' => '\\Views\\Dashboard\\DashboardPage.php',
-    'RenderFunction' => 'RenderDashboardPage',
+    'Name' => 'FeaturesPage',
+    'Namespace' => 'Components\\Views\\Features',
+    'ComponentName' => 'FeaturesPage',
+    'Tag' => 'FeaturesPage',
+    'FullPath' => '\\Views\\Features\\FeaturesPage.php',
+    'TemplatePath' => '\\Views\\Features\\FeaturesPage.html',
+    'BuildPath' => '\\Views\\Features\\FeaturesPage.php',
+    'RenderFunction' => 'RenderFeaturesPage',
     'IsComponent' => true,
     'HasInit' => false,
     'HasMounted' => false,
@@ -133,8 +557,7 @@ $pageEngine->setComponentsInfo(array (
     'Inputs' => 
     array (
       'title' => true,
-      'fruits' => true,
-      'name' => true,
+      'features' => true,
       '__id' => true,
       '_props' => true,
       '_refs' => true,
@@ -143,16 +566,97 @@ $pageEngine->setComponentsInfo(array (
     ),
     'Instance' => NULL,
   ),
-  'Layout' => 
+  'HardwarePage' => 
   array (
-    'Name' => 'Layout',
-    'Namespace' => 'Components\\Views\\Layouts',
-    'ComponentName' => 'Layout',
-    'Tag' => 'Layout',
-    'FullPath' => '\\Views\\Layouts\\Layout.php',
-    'TemplatePath' => '\\Views\\Layouts\\Layout.html',
-    'BuildPath' => '\\Views\\Layouts\\Layout.php',
-    'RenderFunction' => 'RenderLayout',
+    'Name' => 'HardwarePage',
+    'Namespace' => 'Components\\Views\\Hardware',
+    'ComponentName' => 'HardwarePage',
+    'Tag' => 'HardwarePage',
+    'FullPath' => '\\Views\\Hardware\\HardwarePage.php',
+    'TemplatePath' => '\\Views\\Hardware\\HardwarePage.html',
+    'BuildPath' => '\\Views\\Hardware\\HardwarePage.php',
+    'RenderFunction' => 'RenderHardwarePage',
+    'IsComponent' => true,
+    'HasInit' => false,
+    'HasMounted' => false,
+    'HasBeforeMount' => false,
+    'HasVersions' => false,
+    'Relative' => true,
+    'Inputs' => 
+    array (
+      'title' => true,
+      '__id' => true,
+      '_props' => true,
+      '_refs' => true,
+      '_element' => true,
+      '_slots' => true,
+    ),
+    'Instance' => NULL,
+  ),
+  'HomePage' => 
+  array (
+    'Name' => 'HomePage',
+    'Namespace' => 'Components\\Views\\Home',
+    'ComponentName' => 'HomePage',
+    'Tag' => 'HomePage',
+    'FullPath' => '\\Views\\Home\\HomePage.php',
+    'TemplatePath' => '\\Views\\Home\\HomePage.html',
+    'BuildPath' => '\\Views\\Home\\HomePage.php',
+    'RenderFunction' => 'RenderHomePage',
+    'IsComponent' => true,
+    'HasInit' => false,
+    'HasMounted' => true,
+    'HasBeforeMount' => false,
+    'HasVersions' => false,
+    'Relative' => true,
+    'Inputs' => 
+    array (
+      'title' => true,
+      '__id' => true,
+      '_props' => true,
+      '_refs' => true,
+      '_element' => true,
+      '_slots' => true,
+    ),
+    'Instance' => NULL,
+  ),
+  'BaseLayout' => 
+  array (
+    'Name' => 'BaseLayout',
+    'Namespace' => 'Components\\Views\\BaseLayout',
+    'ComponentName' => 'BaseLayout',
+    'Tag' => 'BaseLayout',
+    'FullPath' => '\\Views\\Layouts\\BaseLayout\\BaseLayout.php',
+    'TemplatePath' => '\\Views\\Layouts\\BaseLayout\\BaseLayout.html',
+    'BuildPath' => '\\Views\\Layouts\\BaseLayout\\BaseLayout.php',
+    'RenderFunction' => 'RenderBaseLayout',
+    'IsComponent' => true,
+    'HasInit' => false,
+    'HasMounted' => false,
+    'HasBeforeMount' => false,
+    'HasVersions' => false,
+    'Relative' => true,
+    'Inputs' => 
+    array (
+      'title' => true,
+      '__id' => true,
+      '_props' => true,
+      '_refs' => true,
+      '_element' => true,
+      '_slots' => true,
+    ),
+    'Instance' => NULL,
+  ),
+  'PublicLayout' => 
+  array (
+    'Name' => 'PublicLayout',
+    'Namespace' => 'Components\\Views\\PublicLayout',
+    'ComponentName' => 'PublicLayout',
+    'Tag' => 'PublicLayout',
+    'FullPath' => '\\Views\\Layouts\\PublicLayout\\PublicLayout.php',
+    'TemplatePath' => '\\Views\\Layouts\\PublicLayout\\PublicLayout.html',
+    'BuildPath' => '\\Views\\Layouts\\PublicLayout\\PublicLayout.php',
+    'RenderFunction' => 'RenderPublicLayout',
     'IsComponent' => true,
     'HasInit' => false,
     'HasMounted' => false,
@@ -188,6 +692,7 @@ $pageEngine->setComponentsInfo(array (
     'Relative' => true,
     'Inputs' => 
     array (
+      'title' => true,
       '__id' => true,
       '_props' => true,
       '_refs' => true,
@@ -196,16 +701,80 @@ $pageEngine->setComponentsInfo(array (
     ),
     'Instance' => NULL,
   ),
-  'PatientsPage' => 
+  'Post' => 
   array (
-    'Name' => 'PatientsPage',
-    'Namespace' => 'Components\\Views\\Patients',
-    'ComponentName' => 'PatientsPage',
-    'Tag' => 'PatientsPage',
-    'FullPath' => '\\Views\\Patients\\PatientsPage.php',
-    'TemplatePath' => '\\Views\\Patients\\PatientsPage.html',
-    'BuildPath' => '\\Views\\Patients\\PatientsPage.php',
-    'RenderFunction' => 'RenderPatientsPage',
+    'Name' => 'Post',
+    'Namespace' => '',
+    'ComponentName' => 'Post',
+    'Tag' => 'Post',
+    'FullPath' => '\\Views\\Post\\Post.php',
+    'TemplatePath' => '\\Views\\Post\\Post.html',
+    'BuildPath' => '\\Views\\Post\\Post.php',
+    'RenderFunction' => 'RenderPost',
+    'IsComponent' => true,
+    'HasInit' => false,
+    'HasMounted' => false,
+    'HasBeforeMount' => false,
+    'HasVersions' => false,
+    'Relative' => true,
+    'Inputs' => 
+    array (
+      'content' => true,
+      '__id' => true,
+      '_props' => true,
+      '_refs' => true,
+      '_element' => true,
+      '_slots' => true,
+    ),
+    'Instance' => NULL,
+  ),
+  'PricingPage' => 
+  array (
+    'Name' => 'PricingPage',
+    'Namespace' => 'Components\\Views\\Pricing',
+    'ComponentName' => 'PricingPage',
+    'Tag' => 'PricingPage',
+    'FullPath' => '\\Views\\Pricing\\PricingPage.php',
+    'TemplatePath' => '\\Views\\Pricing\\PricingPage.html',
+    'BuildPath' => '\\Views\\Pricing\\PricingPage.php',
+    'RenderFunction' => 'RenderPricingPage',
+    'IsComponent' => true,
+    'HasInit' => true,
+    'HasMounted' => true,
+    'HasBeforeMount' => false,
+    'HasVersions' => false,
+    'Relative' => true,
+    'Inputs' => 
+    array (
+      'title' => true,
+      'currentUrl' => true,
+      'isActive' => true,
+      'myurl' => true,
+      '__id' => true,
+      '_props' => true,
+      '_refs' => true,
+      '_element' => true,
+      '_slots' => true,
+    ),
+    'Dependencies' => 
+    array (
+      'clientRouter' => 
+      array (
+        'name' => 'ClientRouter',
+      ),
+    ),
+    'Instance' => NULL,
+  ),
+  'ServicesPage' => 
+  array (
+    'Name' => 'ServicesPage',
+    'Namespace' => 'Components\\Views\\Services',
+    'ComponentName' => 'ServicesPage',
+    'Tag' => 'ServicesPage',
+    'FullPath' => '\\Views\\Services\\ServicesPage.php',
+    'TemplatePath' => '\\Views\\Services\\ServicesPage.html',
+    'BuildPath' => '\\Views\\Services\\ServicesPage.php',
+    'RenderFunction' => 'RenderServicesPage',
     'IsComponent' => true,
     'HasInit' => false,
     'HasMounted' => false,
@@ -229,8 +798,8 @@ $pageEngine->setComponentsInfo(array (
     'Namespace' => 'Viewi\\Components\\Assets',
     'ComponentName' => 'CssBundle',
     'Tag' => 'CssBundle',
-    'FullPath' => 'C:\\Users\\kanto\\Desktop\\viewi\\vendor\\viewi\\viewi\\src\\Viewi\\Components\\Assets\\CssBundle.php',
-    'TemplatePath' => 'C:\\Users\\kanto\\Desktop\\viewi\\vendor\\viewi\\viewi\\src\\Viewi\\Components\\Assets\\CssBundle.html',
+    'FullPath' => 'C:\\Users\\kanto\\Desktop\\viewi\\myshopos\\vendor\\viewi\\viewi\\src\\Viewi\\Components\\Assets\\CssBundle.php',
+    'TemplatePath' => 'C:\\Users\\kanto\\Desktop\\viewi\\myshopos\\vendor\\viewi\\viewi\\src\\Viewi\\Components\\Assets\\CssBundle.html',
     'BuildPath' => '\\Viewi\\Components\\Assets\\CssBundle_v1.php',
     'IsComponent' => true,
     'HasInit' => false,
@@ -254,7 +823,7 @@ $pageEngine->setComponentsInfo(array (
     ),
     'Versions' => 
     array (
-      '/viewi-app/assets/lib/css/main.css0000' => 
+      '/viewi-app/assets/static/css/main.css0000' => 
       array (
         'key' => '_v1',
         'RenderFunction' => 'RenderCssBundle_v1',
@@ -263,47 +832,14 @@ $pageEngine->setComponentsInfo(array (
     ),
     'Instance' => NULL,
   ),
-  'HttpClient' => 
-  array (
-    'Name' => 'HttpClient',
-    'Namespace' => 'Viewi\\Common',
-    'FullPath' => 'C:\\Users\\kanto\\Desktop\\viewi\\vendor\\viewi\\viewi\\src\\Viewi\\Common\\HttpClient.php',
-    'IsComponent' => false,
-    'HasInit' => false,
-    'HasMounted' => false,
-    'HasBeforeMount' => false,
-    'Relative' => false,
-    'Dependencies' => 
-    array (
-      'asyncStateManager' => 
-      array (
-        'name' => 'AsyncStateManager',
-      ),
-    ),
-    'Instance' => NULL,
-  ),
-  'AsyncStateManager' => 
-  array (
-    'Name' => 'AsyncStateManager',
-    'Namespace' => 'Viewi\\Components\\Services',
-    'FullPath' => 'C:\\Users\\kanto\\Desktop\\viewi\\vendor\\viewi\\viewi\\src\\Viewi\\Components\\Services\\AsyncStateManager.php',
-    'IsComponent' => false,
-    'HasInit' => false,
-    'HasMounted' => false,
-    'HasBeforeMount' => false,
-    'Relative' => false,
-    'Instance' => 
-    array (
-    ),
-  ),
   'ViewiScripts' => 
   array (
     'Name' => 'ViewiScripts',
     'Namespace' => 'Viewi\\Components\\Assets',
     'ComponentName' => 'ViewiScripts',
     'Tag' => 'ViewiScripts',
-    'FullPath' => 'C:\\Users\\kanto\\Desktop\\viewi\\vendor\\viewi\\viewi\\src\\Viewi\\Components\\Assets\\ViewiScripts.php',
-    'TemplatePath' => 'C:\\Users\\kanto\\Desktop\\viewi\\vendor\\viewi\\viewi\\src\\Viewi\\Components\\Assets\\ViewiScripts.html',
+    'FullPath' => 'C:\\Users\\kanto\\Desktop\\viewi\\myshopos\\vendor\\viewi\\viewi\\src\\Viewi\\Components\\Assets\\ViewiScripts.php',
+    'TemplatePath' => 'C:\\Users\\kanto\\Desktop\\viewi\\myshopos\\vendor\\viewi\\viewi\\src\\Viewi\\Components\\Assets\\ViewiScripts.html',
     'BuildPath' => '\\Viewi\\Components\\Assets\\ViewiScripts.php',
     'RenderFunction' => 'RenderViewiScripts',
     'IsComponent' => true,
@@ -334,15 +870,60 @@ $pageEngine->setComponentsInfo(array (
     ),
     'Instance' => NULL,
   ),
-  'CounterState' => 
+  'Features' => 
   array (
-    'Name' => 'CounterState',
-    'Namespace' => 'Application\\Components\\Services\\Demo',
-    'FullPath' => '\\Services\\Demos\\CounterStates.php',
+    'Name' => 'Features',
+    'Namespace' => 'Components\\Services',
+    'FullPath' => '\\Services\\Features.php',
     'IsComponent' => false,
     'HasInit' => false,
     'HasMounted' => false,
     'HasBeforeMount' => false,
+    'Relative' => true,
+    'Instance' => NULL,
+  ),
+  'ForgotPasswordPage_Slot' => 
+  array (
+    'Name' => 'ForgotPasswordPage_Slot',
+    'Namespace' => 'Components\\Views\\Auth\\ForgotPassword',
+    'ComponentName' => 'ForgotPasswordPage',
+    'Tag' => 'ForgotPasswordPage_Slot',
+    'FullPath' => '\\Views\\Auth\\ForgotPassword\\ForgotPasswordPage.php',
+    'TemplatePath' => '\\Views\\Auth\\ForgotPassword\\ForgotPasswordPage_Slot.html',
+    'BuildPath' => '\\_slots\\Views\\Auth\\ForgotPassword\\ForgotPasswordPage_Slot.php',
+    'RenderFunction' => 'RenderForgotPasswordPage_Slot',
+    'IsComponent' => false,
+    'IsSlot' => true,
+    'Relative' => true,
+    'Instance' => NULL,
+  ),
+  'SignInPage_Slot' => 
+  array (
+    'Name' => 'SignInPage_Slot',
+    'Namespace' => 'Components\\Views\\Auth\\SignIn',
+    'ComponentName' => 'SignInPage',
+    'Tag' => 'SignInPage_Slot',
+    'FullPath' => '\\Views\\Auth\\SignIn\\SignInPage.php',
+    'TemplatePath' => '\\Views\\Auth\\SignIn\\SignInPage_Slot.html',
+    'BuildPath' => '\\_slots\\Views\\Auth\\SignIn\\SignInPage_Slot.php',
+    'RenderFunction' => 'RenderSignInPage_Slot',
+    'IsComponent' => false,
+    'IsSlot' => true,
+    'Relative' => true,
+    'Instance' => NULL,
+  ),
+  'SignUpPage_Slot' => 
+  array (
+    'Name' => 'SignUpPage_Slot',
+    'Namespace' => 'Components\\Views\\Auth\\SignUp',
+    'ComponentName' => 'SignUpPage',
+    'Tag' => 'SignUpPage_Slot',
+    'FullPath' => '\\Views\\Auth\\SignUp\\SignUpPage.php',
+    'TemplatePath' => '\\Views\\Auth\\SignUp\\SignUpPage_Slot.html',
+    'BuildPath' => '\\_slots\\Views\\Auth\\SignUp\\SignUpPage_Slot.php',
+    'RenderFunction' => 'RenderSignUpPage_Slot',
+    'IsComponent' => false,
+    'IsSlot' => true,
     'Relative' => true,
     'Instance' => NULL,
   ),
@@ -361,16 +942,61 @@ $pageEngine->setComponentsInfo(array (
     'Relative' => true,
     'Instance' => NULL,
   ),
-  'DashboardPage_Slot' => 
+  'FeaturesPage_Slot' => 
   array (
-    'Name' => 'DashboardPage_Slot',
-    'Namespace' => 'Components\\Views\\Dashboard',
-    'ComponentName' => 'DashboardPage',
-    'Tag' => 'DashboardPage_Slot',
-    'FullPath' => '\\Views\\Dashboard\\DashboardPage.php',
-    'TemplatePath' => '\\Views\\Dashboard\\DashboardPage_Slot.html',
-    'BuildPath' => '\\_slots\\Views\\Dashboard\\DashboardPage_Slot.php',
-    'RenderFunction' => 'RenderDashboardPage_Slot',
+    'Name' => 'FeaturesPage_Slot',
+    'Namespace' => 'Components\\Views\\Features',
+    'ComponentName' => 'FeaturesPage',
+    'Tag' => 'FeaturesPage_Slot',
+    'FullPath' => '\\Views\\Features\\FeaturesPage.php',
+    'TemplatePath' => '\\Views\\Features\\FeaturesPage_Slot.html',
+    'BuildPath' => '\\_slots\\Views\\Features\\FeaturesPage_Slot.php',
+    'RenderFunction' => 'RenderFeaturesPage_Slot',
+    'IsComponent' => false,
+    'IsSlot' => true,
+    'Relative' => true,
+    'Instance' => NULL,
+  ),
+  'HardwarePage_Slot' => 
+  array (
+    'Name' => 'HardwarePage_Slot',
+    'Namespace' => 'Components\\Views\\Hardware',
+    'ComponentName' => 'HardwarePage',
+    'Tag' => 'HardwarePage_Slot',
+    'FullPath' => '\\Views\\Hardware\\HardwarePage.php',
+    'TemplatePath' => '\\Views\\Hardware\\HardwarePage_Slot.html',
+    'BuildPath' => '\\_slots\\Views\\Hardware\\HardwarePage_Slot.php',
+    'RenderFunction' => 'RenderHardwarePage_Slot',
+    'IsComponent' => false,
+    'IsSlot' => true,
+    'Relative' => true,
+    'Instance' => NULL,
+  ),
+  'HomePage_Slot' => 
+  array (
+    'Name' => 'HomePage_Slot',
+    'Namespace' => 'Components\\Views\\Home',
+    'ComponentName' => 'HomePage',
+    'Tag' => 'HomePage_Slot',
+    'FullPath' => '\\Views\\Home\\HomePage.php',
+    'TemplatePath' => '\\Views\\Home\\HomePage_Slot.html',
+    'BuildPath' => '\\_slots\\Views\\Home\\HomePage_Slot.php',
+    'RenderFunction' => 'RenderHomePage_Slot',
+    'IsComponent' => false,
+    'IsSlot' => true,
+    'Relative' => true,
+    'Instance' => NULL,
+  ),
+  'PublicLayout_Slot' => 
+  array (
+    'Name' => 'PublicLayout_Slot',
+    'Namespace' => 'Components\\Views\\PublicLayout',
+    'ComponentName' => 'PublicLayout',
+    'Tag' => 'PublicLayout_Slot',
+    'FullPath' => '\\Views\\Layouts\\PublicLayout\\PublicLayout.php',
+    'TemplatePath' => '\\Views\\Layouts\\PublicLayout\\PublicLayout_Slot.html',
+    'BuildPath' => '\\_slots\\Views\\Layouts\\PublicLayout\\PublicLayout_Slot.php',
+    'RenderFunction' => 'RenderPublicLayout_Slot',
     'IsComponent' => false,
     'IsSlot' => true,
     'Relative' => true,
@@ -391,16 +1017,31 @@ $pageEngine->setComponentsInfo(array (
     'Relative' => true,
     'Instance' => NULL,
   ),
-  'PatientsPage_Slot' => 
+  'PricingPage_Slot' => 
   array (
-    'Name' => 'PatientsPage_Slot',
-    'Namespace' => 'Components\\Views\\Patients',
-    'ComponentName' => 'PatientsPage',
-    'Tag' => 'PatientsPage_Slot',
-    'FullPath' => '\\Views\\Patients\\PatientsPage.php',
-    'TemplatePath' => '\\Views\\Patients\\PatientsPage_Slot.html',
-    'BuildPath' => '\\_slots\\Views\\Patients\\PatientsPage_Slot.php',
-    'RenderFunction' => 'RenderPatientsPage_Slot',
+    'Name' => 'PricingPage_Slot',
+    'Namespace' => 'Components\\Views\\Pricing',
+    'ComponentName' => 'PricingPage',
+    'Tag' => 'PricingPage_Slot',
+    'FullPath' => '\\Views\\Pricing\\PricingPage.php',
+    'TemplatePath' => '\\Views\\Pricing\\PricingPage_Slot.html',
+    'BuildPath' => '\\_slots\\Views\\Pricing\\PricingPage_Slot.php',
+    'RenderFunction' => 'RenderPricingPage_Slot',
+    'IsComponent' => false,
+    'IsSlot' => true,
+    'Relative' => true,
+    'Instance' => NULL,
+  ),
+  'ServicesPage_Slot' => 
+  array (
+    'Name' => 'ServicesPage_Slot',
+    'Namespace' => 'Components\\Views\\Services',
+    'ComponentName' => 'ServicesPage',
+    'Tag' => 'ServicesPage_Slot',
+    'FullPath' => '\\Views\\Services\\ServicesPage.php',
+    'TemplatePath' => '\\Views\\Services\\ServicesPage_Slot.html',
+    'BuildPath' => '\\_slots\\Views\\Services\\ServicesPage_Slot.php',
+    'RenderFunction' => 'RenderServicesPage_Slot',
     'IsComponent' => false,
     'IsSlot' => true,
     'Relative' => true,
