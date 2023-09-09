@@ -1,6 +1,7 @@
 {
     "require": {
-        "viewi/viewi": "^1.0"
+        "viewi/viewi": "^1.0",
+        "sergeytsalkov/meekrodb": "^2.4"
     },
     "autoload": {
         "psr-4": {

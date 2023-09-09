@@ -3,15 +3,16 @@
 namespace Components\Views\Common;
 
 use Viewi\BaseComponent;
-// use Application\Components\Services\Demo\CounterState;
+use Components\Services\Features;
 
 class NavBar extends BaseComponent
 {
     // public CounterState $counter;
     public string $currentUrl = '';
 
-    // public function __init(CounterState $counterState)
-    // {
-    //     $this->counter = $counterState;
-    // }   
+    public Features $features;
+
+    function __init(Features $features){
+        $this->features = $features;
+    }  
 }

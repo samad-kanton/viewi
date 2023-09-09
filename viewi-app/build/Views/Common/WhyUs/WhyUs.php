@@ -3,8 +3,8 @@
 use Viewi\PageEngine;
 use Viewi\BaseComponent;
 
-function RenderCoreValues(
-    Components\Views\Common\CoreValues $_component,
+function RenderWhyUs(
+    Components\Views\Common\WhyUs $_component,
     PageEngine $pageEngine,
     array $slots
     , ...$scope

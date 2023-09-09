@@ -313,6 +313,60 @@ function date (format, timestamp) {
 }
 
 
+function json_decode (strJson) { 
+  var $global = (typeof window !== 'undefined' ? window : global)
+  $global.$locutus = $global.$locutus || {}
+  var $locutus = $global.$locutus
+  $locutus.php = $locutus.php || {}
+  var json = $global.JSON
+  if (typeof json === 'object' && typeof json.parse === 'function') {
+    try {
+      return json.parse(strJson)
+    } catch (err) {
+      if (!(err instanceof SyntaxError)) {
+        throw new Error('Unexpected error type in json_decode()')
+      }
+      $locutus.php.last_error_json = 4
+      return null
+    }
+  }
+  var chars = [
+    '\u0000',
+    '\u00ad',
+    '\u0600-\u0604',
+    '\u070f',
+    '\u17b4',
+    '\u17b5',
+    '\u200c-\u200f',
+    '\u2028-\u202f',
+    '\u2060-\u206f',
+    '\ufeff',
+    '\ufff0-\uffff'
+  ].join('')
+  var cx = new RegExp('[' + chars + ']', 'g')
+  var j
+  var text = strJson
+  cx.lastIndex = 0
+  if (cx.test(text)) {
+    text = text.replace(cx, function (a) {
+      return '\\u' + ('0000' + a.charCodeAt(0)
+        .toString(16))
+        .slice(-4)
+    })
+  }
+  var m = (/^[\],:{}\s]*$/)
+    .test(text.replace(/\\(?:["\\/bfnrt]|u[0-9a-fA-F]{4})/g, '@')
+    .replace(/"[^"\\\n\r]*"|true|false|null|-?\d+(?:\.\d*)?(?:[eE][+-]?\d+)?/g, ']')
+    .replace(/(?:^|:|,)(?:\s*\[)+/g, ''))
+  if (m) {
+    j = eval('(' + text + ')') 
+    return j
+  }
+  $locutus.php.last_error_json = 4
+  return null
+}
+
+
 var viewiBundleEntry = function (exports, bring) {
     var $base = bring('$base');
     var notify = bring('notify');
@@ -660,18 +714,46 @@ var SignInPage = function () {
 
     exports.SignInPage = SignInPage;
 
+var StaticDataService = function (_http, _router) {
+    var $this = this;
+    var http = null;
+    var router = null;
+
+    this.__construct = function (_http, _router) {
+        http = _http;
+        router = _router;
+    };
+
+    this.GetCountries = function (callback) {
+        http.get('/viewi-app/assets/static/data/countries.json') .then(function (data) {
+            // echo $data;
+            callback(data);
+        },function (error) {
+            console.log(error);
+        });
+    };
+
+    this.__construct.apply(this, arguments);
+};
+
+    exports.StaticDataService = StaticDataService;
+
+// namespace Components\Db\conn;
+// require "/viewi-app/Components/Services/db/conn.php";
 var SignUpPage = function () {
     var $this = this;
     $base(this);
     this.title = "Create a MyshopOS account";
-    this.countries = [];
-    this.fruits = ["Orange", "Apple"] ;
+    this.staticDataService = null;
+    this.staticData = null;
     var http = null;
     var router = null;
 
-    this.__init = function (_http, _router) {
+    this.__init = function (_http, _router, staticDataService) {
         http = _http;
         router = _router;
+        $this.staticDataService = staticDataService;
+        $this.ReadCountries();
     };
 
     this.__rendered = function () {
@@ -686,35 +768,24 @@ var SignUpPage = function () {
         //     $document->addEventListener('resize', $this->onResize, ['passive' => true]);
         // }
         // echo DomHelper::getDocument()->location;
-        http.get('/viewi-app/assets/static/data/countries.json') .then(function (data) {
-            console.log(data);
-            // $this->countries = json_decode(json_encode($data));
-            $this.countries = (data);
-        },function (error) {
-            console.log(error);
-        });
-    };
-
-    this.popCountries = function () {
-        // $this->http->get('/viewi-app/assets/static/js/countries.json')
+        // $this->http->get('/viewi-app/assets/static/data/countries.json')
         // ->then(function($data){
         //     echo $data;
+        //     // $this->countries = json_decode(json_encode($data));
+        //     $this->countries = ($data);
         // }, function($error){
         //     echo $error;
         // });
-        // echo file_get_contents('/viewi-app/assets/static/js/countries.json');
-        // <<<'javascript'
-        //     const resp = fetch('/viewi-app/assets/static/js/countries.json')
-        //     .then(resp => resp.ok && resp.json())
-        //     .then(data => {
-        //         console.log(data);
-        //         $onClickOutside = "Hello";
-        //         document.querySelector('#country').value = "";
-        //     })
-        //     javascript;        
     };
 
-    this.handleSubmit = function (event) {
+    this.ReadCountries = function () {
+        $this.staticDataService.GetCountries(function (staticData) {
+            console.log(staticData);
+            $this.staticData = staticData;
+        });
+    };
+
+    this.handleSignUp = function (event) {
         event.preventDefault();
     };
 };
@@ -759,23 +830,6 @@ var MobileApp = function () {
 
     exports.MobileApp = MobileApp;
 
-var CoreValues = function () {
-    var $this = this;
-    $base(this);
-    // public CounterState $counter;
-    // public function __init(CounterState $counterState)
-    // {
-    //     $this->counter = $counterState;
-    // }   
-};
-
-
-this.getFeatures = function () {
-    console.log($this.features);
-    return $this.features;
-};
-    exports.CoreValues = CoreValues;
-
 var Footer = function () {
     var $this = this;
     $base(this);
@@ -800,16 +854,102 @@ var Hero = function () {
 
     exports.Hero = Hero;
 
-// use Application\Components\Services\Demo\CounterState;
+var Features = function () {
+    var $this = this;
+    this.features = [
+        {
+            link: "features/invoicing",
+            icon: "ticket-alt",
+            title: "Invoicing",
+            text: "Create invoices of the products or services you offer and get paid faster."
+        } ,
+        {
+            link: "features/estimates",
+            icon: "calculator",
+            title: "Estimates",
+            text: "Create invoices of the products or services you offer and get paid faster."
+        } ,
+        {
+            link: "features/sales-orders",
+            icon: "cart-full",
+            title: "Sales Orders",
+            text: "Create invoices of the products or services you offer and get paid faster."
+        } ,
+        {
+            link: "features/purchase-orders",
+            icon: "shopping-basket",
+            title: "Purchase Orders",
+            text: "Create invoices of the products or services you offer and get paid faster."
+        } ,
+        {
+            link: "features/bills",
+            icon: "wallet",
+            title: "Bills",
+            text: "Create invoices of the products or services you offer and get paid faster."
+        } ,
+        {
+            link: "features/inventory",
+            icon: "tag",
+            title: "Inventory",
+            text: "Create invoices of the products or services you offer and get paid faster."
+        } ,
+        {
+            link: "features/expenses",
+            icon: "notepad",
+            title: "Expenses",
+            text: "Create invoices of the products or services you offer and get paid faster."
+        } ,
+        {
+            link: "features/taxation",
+            icon: "remove-file",
+            title: "Tax",
+            text: "Create invoices of the products or services you offer and get paid faster."
+        } ,
+        {
+            link: "features/reporting",
+            icon: "graph",
+            title: "Reporting",
+            text: "Create invoices of the products or services you offer and get paid faster."
+        } ,
+        {
+            link: "features/online-payments",
+            icon: "cloud",
+            title: "Online Payments",
+            text: "Create invoices of the products or services you offer and get paid faster."
+        } ,
+        {
+            link: "features/user-rights",
+            icon: "lock",
+            title: "User Rights",
+            text: "Create invoices of the products or services you offer and get paid faster."
+        } ,
+        {
+            link: "features/customer-portal",
+            icon: "network",
+            title: "Customer Portal",
+            text: "Create invoices of the products or services you offer and get paid faster."
+        } ,
+        {
+            link: "features/vendor-portal",
+            icon: "home",
+            title: "Vendor Portal",
+            text: "Create invoices of the products or services you offer and get paid faster."
+        } 
+    ] ;
+};
+
+    exports.Features = Features;
+
 var NavBar = function () {
     var $this = this;
     $base(this);
     // public CounterState $counter;
     this.currentUrl = '';
-    // public function __init(CounterState $counterState)
-    // {
-    //     $this->counter = $counterState;
-    // }   
+    this.features = null;
+
+    this.__init = function (features) {
+        $this.features = features;
+    };
 };
 
     exports.NavBar = NavBar;
@@ -839,6 +979,23 @@ var Testimonial = function () {
 };
 
     exports.Testimonial = Testimonial;
+
+var WhyUs = function () {
+    var $this = this;
+    $base(this);
+    // public CounterState $counter;
+    // public function __init(CounterState $counterState)
+    // {
+    //     $this->counter = $counterState;
+    // }   
+};
+
+
+this.getFeatures = function () {
+    console.log($this.features);
+    return $this.features;
+};
+    exports.WhyUs = WhyUs;
 
 var ContactPage = function () {
     var $this = this;
@@ -888,6 +1045,10 @@ var FeaturesPage = function () {
     $base(this);
     this.title = 'Features';
     this.features = null;
+
+    this.__init = function (features) {
+        $this.features = features;
+    };
 };
 
     exports.FeaturesPage = FeaturesPage;
@@ -896,7 +1057,22 @@ var HardwarePage = function () {
     var $this = this;
     $base(this);
     this.title = 'Hardware';
-    
+    this.activeIndex = 0;
+    this.activeClass = "border-blue-600 bg-white hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-500 dark:bg-gray-900 dark:focus:ring-blue-800";
+    this.inactiveClass = "border-white hover:border-gray-200 dark:border-gray-900 dark:bg-gray-900 dark:hover:border-gray-700 bg-white focus:ring-4 focus:outline-none focus:ring-gray-300 dark:text-white dark:focus:ring-gray-800";
+    this.active = '';
+
+    this.__init = function () {
+        $this.active = $this.activeIndex == 0 ? $this.activeClass:$this.inactiveClass;
+    };
+
+    this.toggleCategoryIndex = function (event, index) {
+        // echo $index;
+        $this.activeIndex = index;
+        $this.active = $this.activeIndex == index ? $this.activeClass:$this.inactiveClass;
+        return $this.active;
+    };
+
     this.handleSubmit = function (event) {
         event.preventDefault();
     };

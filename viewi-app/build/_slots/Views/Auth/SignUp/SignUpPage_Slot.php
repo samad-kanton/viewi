@@ -15,7 +15,9 @@ function RenderSignUpPage_Slot(
 
     $_content .= '
     <div class="min-h-screen bg-gray-50 dark:bg-gray-900 dark:text-white grid items-center">
-        
+        ';
+    $_content .= htmlentities($_component->staticData ?? '');
+    $_content .= '
         <div class="grid grid-cols-1 sm:grid-cols-[.7fr_1fr]">
             <div class="hidden sm:grid justify-center items-center">
                 <img src="/viewi-app/assets/images/welcome.png" class="w-[200px] h-[200px]" alt="MyshopOS Logo"/>
@@ -31,7 +33,7 @@ function RenderSignUpPage_Slot(
                                 <a href="/" class="text-lg font-extrabold">MyshopOS</a>
                                 <p>
                                     <span>Already have an account</span>
-                                    <a href="/signin" class="text-blue-700 hover:underline dark:text-blue-500">Signin</a>
+                                    <a href="/signin" class="text-blue-700 hover:underline dark:text-blue-500 text-xl">Signin</a>
                                 </p>
                             </div>
                         </p>                    
@@ -40,36 +42,21 @@ function RenderSignUpPage_Slot(
                         <h5 class="text-xl font-medium text-gray-900 dark:text-white">Create a free account and experience full-featured premium plan for 14 days.</h5>
                         <div>
                             <label for="company_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Company Name</label>
-                            <input type="text" name="company_name" id="company_name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-4 md:p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="your business name" required/>
+                            <input type="text" name="company_name" id="company_name" class="bg-gray-50 border border-gray-300 text-gray-900 text-md sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-4 md:p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="your business name" required/>
                         </div>
                         <div>
                             <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your email</label>
-                            <input type="email" name="email" id="email" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-4 md:p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="name@company.com" required/>
+                            <input type="email" name="email" id="email" class="bg-gray-50 border border-gray-300 text-gray-900 text-md sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-4 md:p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="name@company.com" required/>
                         </div>
                         <div>
                             <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your password</label>
-                            <input type="password" name="password" id="password" placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-4 md:p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required/>
+                            <input type="password" name="password" id="password" placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;" class="bg-gray-50 border border-gray-300 text-gray-900 text-md sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-4 md:p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required/>
                         </div>
                         <div>
                             <label for="country" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Company Location</label>
-                            <select id="country" class="bg-gray-50 border border-gray-300 text-gray-900 mb-6 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-4 md:p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
+                            <select id="country" class="bg-gray-50 border border-gray-300 text-gray-900 mb-6 text-md sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-4 md:p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
                                 <option selected>Choose a country</option>
-                                ';
-    foreach($_component->countries as $i => $v){
-    
-    $_content .= '
-                                    <option';
-    $attrValue = $v->id;
-    if ($attrValue !== null) {
-        $_content .= ' value="' . htmlentities($attrValue) . '"';
-    }
-    $_content .= '>';
-    $_content .= htmlentities($v->name ?? '');
-    $_content .= '</option>
-                                ';
-    }
-    
-    $_content .= '
+                              
                             </select>
                             <p class="mx-auto -mt-5">Your data will be stored in US Data Center</p>
                         </div>

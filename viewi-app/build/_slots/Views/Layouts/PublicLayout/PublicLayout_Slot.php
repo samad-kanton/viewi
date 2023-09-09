@@ -38,14 +38,6 @@ function RenderPublicLayout_Slot(
     $_content .= '
     </div>
 
-    ';
-    $slotContents[0] = false;
-    $pageEngine->putInQueue($_content);
-    $pageEngine->renderComponent('ViewiScripts', [], $_component, $slotContents, [], ...$scope);
-    $slotContents = [];
-    $_content = "";
-    $_content .= '
-
     <script src="//code.tidio.co/rwlyw0a6tajrsjt8h9tp85it0kpxd1nk.js" async></script>
 ';
     return $_content;

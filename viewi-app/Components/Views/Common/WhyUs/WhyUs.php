@@ -4,7 +4,7 @@ namespace Components\Views\Common;
 
 use Viewi\BaseComponent;
 
-class CoreValues extends BaseComponent
+class WhyUs extends BaseComponent
 {
     // public CounterState $counter;
 

@@ -31,12 +31,30 @@ function RenderNavBar(
   <div class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-sticky">
     <ul class="flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-gray-50 md:flex-row space-x-4 lg:space-x-8 md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
       <li>
-        <a href="/features" id="mega-menu-dropdown-button" data-dropdown-toggle="mega-menu-dropdown" data-dropdown-trigger="hover" class="flex items-center justify-between w-full py-2 pl-3 pr-4 font-medium text-gray-900 border-b border-gray-100 md:w-auto hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-600 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-blue-500 md:dark:hover:bg-transparent dark:border-gray-700">
+        <a href="/features" id="mega-menu-dropdown-button" data-dropdown-toggle="mega-menu-dropdown" data-dropdown-trigger="hover" class="flex items-center justify-between w-full py-2 pl-5 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 md:w-auto dark:text-white md:dark:hover:text-blue-500 dark:focus:text-white dark:border-gray-700 dark:hover:bg-gray-700 md:dark:hover:bg-transparent">
           Features 
           <i class="lni lni-chevron-down ml-2.5"></i>
         </a>
-        <div id="mega-menu-dropdown" class="absolute z-10 grid hidden w-auto grid-cols-2 text-sm bg-white border border-gray-100 rounded-lg shadow-md dark:border-gray-700 md:grid-cols-3 dark:bg-gray-700">
-          <div class="p-4 pb-0 text-gray-900 md:pb-4 dark:text-white">
+        <div id="mega-menu-dropdown" class="absolute z-10 hidden w-auto text-sm bg-white border border-gray-100 rounded-lg shadow-md dark:border-gray-700 dark:bg-gray-700">
+          <ul class="space-y-2 p-4 pb-0 grid grid-cols-2 sm:grid-cols-3 gap-x-10" aria-labelledby="mega-menu-dropdown-button">
+            ';
+    foreach(json_decode(json_encode($_component->features->features)) as $i => $feature){
+    
+    $_content .= '<li class="text-gray-900 p-1 md:pb-1 dark:text-white">
+              <a';
+    $attrValue = $feature->link;
+    if ($attrValue !== null) {
+        $_content .= ' href="' . htmlentities($attrValue) . '"';
+    }
+    $_content .= ' class="text-gray-500 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-500">';
+    $_content .= htmlentities($feature->title ?? '');
+    $_content .= '</a>
+            </li>';
+    }
+    
+    $_content .= '
+          </ul>
+          <!-- <div class="p-4 pb-0 text-gray-900 md:pb-4 dark:text-white">
             <ul class="space-y-4" aria-labelledby="mega-menu-dropdown-button">
               <li>
                 <a href="#" class="text-gray-500 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-500">About Us</a>
@@ -80,7 +98,7 @@ function RenderNavBar(
                 <a href="#" class="text-gray-500 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-500">Terms</a>
               </li>
             </ul>
-          </div>
+          </div> -->
         </div>
       </li>
       <li>
@@ -97,15 +115,11 @@ function RenderNavBar(
       <li class="flex items-center gap-1">
         <a href="/hardware" class="block py-2 pl-1 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Hardware</a>
       </li>
-      <!-- <li class="flex items-center gap-1">
-        <a href="/resources" class="block py-2 pl-1 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Resources</a>
-      </li> -->
       <li>
-        <button id="dropdownNavbarLink" data-dropdown-toggle="dropdownNavbar" data-dropdown-trigger="hover" class="flex items-center justify-between w-full py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 md:w-auto dark:text-white md:dark:hover:text-blue-500 dark:focus:text-white dark:border-gray-700 dark:hover:bg-gray-700 md:dark:hover:bg-transparent">
+        <button id="dropdownNavbarLink" data-dropdown-toggle="dropdownNavbar" data-dropdown-trigger="hover" class="flex items-center justify-between w-full py-2 pl-1 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 md:w-auto dark:text-white md:dark:hover:text-blue-500 dark:focus:text-white dark:border-gray-700 dark:hover:bg-gray-700 md:dark:hover:bg-transparent">
           Resources 
           <i class="lni lni-chevron-down ml-2.5"></i>
         </button>
-        <!-- Dropdown menu -->
         <div id="dropdownNavbar" class="z-10 hidden font-normal bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600">
           <ul class="py-2 text-sm text-gray-700 dark:text-gray-400" aria-labelledby="dropdownLargeButton">
             <li>

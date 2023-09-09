@@ -174,6 +174,29 @@ $pageEngine->setComponentsInfo(array (
     ),
     'Instance' => NULL,
   ),
+  'StaticDataService' => 
+  array (
+    'Name' => 'StaticDataService',
+    'Namespace' => 'Components\\Services',
+    'FullPath' => '\\Services\\StaticDataService.php',
+    'IsComponent' => false,
+    'HasInit' => false,
+    'HasMounted' => false,
+    'HasBeforeMount' => false,
+    'Relative' => true,
+    'Dependencies' => 
+    array (
+      'http' => 
+      array (
+        'name' => 'HttpClient',
+      ),
+      'router' => 
+      array (
+        'name' => 'ClientRouter',
+      ),
+    ),
+    'Instance' => NULL,
+  ),
   'SignUpPage' => 
   array (
     'Name' => 'SignUpPage',
@@ -193,8 +216,8 @@ $pageEngine->setComponentsInfo(array (
     'Inputs' => 
     array (
       'title' => true,
-      'countries' => true,
-      'fruits' => true,
+      'staticDataService' => true,
+      'staticData' => true,
       '__id' => true,
       '_props' => true,
       '_refs' => true,
@@ -210,6 +233,10 @@ $pageEngine->setComponentsInfo(array (
       'router' => 
       array (
         'name' => 'ClientRouter',
+      ),
+      'staticDataService' => 
+      array (
+        'name' => 'StaticDataService',
       ),
     ),
     'Instance' => NULL,
@@ -318,32 +345,6 @@ $pageEngine->setComponentsInfo(array (
     ),
     'Instance' => NULL,
   ),
-  'CoreValues' => 
-  array (
-    'Name' => 'CoreValues',
-    'Namespace' => 'Components\\Views\\Common',
-    'ComponentName' => 'CoreValues',
-    'Tag' => 'CoreValues',
-    'FullPath' => '\\Views\\Common\\CoreValues\\CoreValues.php',
-    'TemplatePath' => '\\Views\\Common\\CoreValues\\CoreValues.html',
-    'BuildPath' => '\\Views\\Common\\CoreValues\\CoreValues.php',
-    'RenderFunction' => 'RenderCoreValues',
-    'IsComponent' => true,
-    'HasInit' => false,
-    'HasMounted' => false,
-    'HasBeforeMount' => false,
-    'HasVersions' => false,
-    'Relative' => true,
-    'Inputs' => 
-    array (
-      '__id' => true,
-      '_props' => true,
-      '_refs' => true,
-      '_element' => true,
-      '_slots' => true,
-    ),
-    'Instance' => NULL,
-  ),
   'Footer' => 
   array (
     'Name' => 'Footer',
@@ -396,6 +397,18 @@ $pageEngine->setComponentsInfo(array (
     ),
     'Instance' => NULL,
   ),
+  'Features' => 
+  array (
+    'Name' => 'Features',
+    'Namespace' => 'Components\\Services',
+    'FullPath' => '\\Services\\Features.php',
+    'IsComponent' => false,
+    'HasInit' => false,
+    'HasMounted' => false,
+    'HasBeforeMount' => false,
+    'Relative' => true,
+    'Instance' => NULL,
+  ),
   'NavBar' => 
   array (
     'Name' => 'NavBar',
@@ -407,7 +420,7 @@ $pageEngine->setComponentsInfo(array (
     'BuildPath' => '\\Views\\Common\\Navbar\\NavBar.php',
     'RenderFunction' => 'RenderNavBar',
     'IsComponent' => true,
-    'HasInit' => false,
+    'HasInit' => true,
     'HasMounted' => false,
     'HasBeforeMount' => false,
     'HasVersions' => false,
@@ -415,11 +428,19 @@ $pageEngine->setComponentsInfo(array (
     'Inputs' => 
     array (
       'currentUrl' => true,
+      'features' => true,
       '__id' => true,
       '_props' => true,
       '_refs' => true,
       '_element' => true,
       '_slots' => true,
+    ),
+    'Dependencies' => 
+    array (
+      'features' => 
+      array (
+        'name' => 'Features',
+      ),
     ),
     'Instance' => NULL,
   ),
@@ -459,6 +480,32 @@ $pageEngine->setComponentsInfo(array (
     'TemplatePath' => '\\Views\\Common\\Testimonial\\Testimonial.html',
     'BuildPath' => '\\Views\\Common\\Testimonial\\Testimonial.php',
     'RenderFunction' => 'RenderTestimonial',
+    'IsComponent' => true,
+    'HasInit' => false,
+    'HasMounted' => false,
+    'HasBeforeMount' => false,
+    'HasVersions' => false,
+    'Relative' => true,
+    'Inputs' => 
+    array (
+      '__id' => true,
+      '_props' => true,
+      '_refs' => true,
+      '_element' => true,
+      '_slots' => true,
+    ),
+    'Instance' => NULL,
+  ),
+  'WhyUs' => 
+  array (
+    'Name' => 'WhyUs',
+    'Namespace' => 'Components\\Views\\Common',
+    'ComponentName' => 'WhyUs',
+    'Tag' => 'WhyUs',
+    'FullPath' => '\\Views\\Common\\WhyUs\\WhyUs.php',
+    'TemplatePath' => '\\Views\\Common\\WhyUs\\WhyUs.html',
+    'BuildPath' => '\\Views\\Common\\WhyUs\\WhyUs.php',
+    'RenderFunction' => 'RenderWhyUs',
     'IsComponent' => true,
     'HasInit' => false,
     'HasMounted' => false,
@@ -549,7 +596,7 @@ $pageEngine->setComponentsInfo(array (
     'BuildPath' => '\\Views\\Features\\FeaturesPage.php',
     'RenderFunction' => 'RenderFeaturesPage',
     'IsComponent' => true,
-    'HasInit' => false,
+    'HasInit' => true,
     'HasMounted' => false,
     'HasBeforeMount' => false,
     'HasVersions' => false,
@@ -564,6 +611,13 @@ $pageEngine->setComponentsInfo(array (
       '_element' => true,
       '_slots' => true,
     ),
+    'Dependencies' => 
+    array (
+      'features' => 
+      array (
+        'name' => 'Features',
+      ),
+    ),
     'Instance' => NULL,
   ),
   'HardwarePage' => 
@@ -577,7 +631,7 @@ $pageEngine->setComponentsInfo(array (
     'BuildPath' => '\\Views\\Hardware\\HardwarePage.php',
     'RenderFunction' => 'RenderHardwarePage',
     'IsComponent' => true,
-    'HasInit' => false,
+    'HasInit' => true,
     'HasMounted' => false,
     'HasBeforeMount' => false,
     'HasVersions' => false,
@@ -585,6 +639,10 @@ $pageEngine->setComponentsInfo(array (
     'Inputs' => 
     array (
       'title' => true,
+      'activeIndex' => true,
+      'activeClass' => true,
+      'inactiveClass' => true,
+      'active' => true,
       '__id' => true,
       '_props' => true,
       '_refs' => true,
@@ -868,18 +926,6 @@ $pageEngine->setComponentsInfo(array (
         'name' => 'AsyncStateManager',
       ),
     ),
-    'Instance' => NULL,
-  ),
-  'Features' => 
-  array (
-    'Name' => 'Features',
-    'Namespace' => 'Components\\Services',
-    'FullPath' => '\\Services\\Features.php',
-    'IsComponent' => false,
-    'HasInit' => false,
-    'HasMounted' => false,
-    'HasBeforeMount' => false,
-    'Relative' => true,
     'Instance' => NULL,
   ),
   'ForgotPasswordPage_Slot' => 

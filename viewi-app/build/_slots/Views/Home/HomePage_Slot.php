@@ -30,7 +30,7 @@ function RenderHomePage_Slot(
             ';
     $slotContents[0] = false;
     $pageEngine->putInQueue($_content);
-    $pageEngine->renderComponent('CoreValues', [], $_component, $slotContents, [], ...$scope);
+    $pageEngine->renderComponent('WhyUs', [], $_component, $slotContents, [], ...$scope);
     $slotContents = [];
     $_content = "";
     $_content .= '
