@@ -14,10 +14,10 @@ function RenderSignUpPage_Slot(
     $_content = '';
 
     $_content .= '
-    <div class="min-h-screen bg-gray-50 dark:bg-gray-900 dark:text-white grid items-center">
-        ';
-    $_content .= htmlentities($_component->staticData ?? '');
+    Data: ';
+    $_content .= htmlentities(count($_component->staticData) ?? '');
     $_content .= '
+    <div class="min-h-screen bg-gray-50 dark:bg-gray-900 dark:text-white grid items-center">
         <div class="grid grid-cols-1 sm:grid-cols-[.7fr_1fr]">
             <div class="hidden sm:grid justify-center items-center">
                 <img src="/viewi-app/assets/images/welcome.png" class="w-[200px] h-[200px]" alt="MyshopOS Logo"/>

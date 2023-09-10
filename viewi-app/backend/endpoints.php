@@ -12,6 +12,13 @@ Router::register('get', '/api/name', function () {
     ];
 });
 
+Router::register('get', '/api/countries', function () {
+    // return json_decode(__DIR__ . '/../assets/static/data/countries.json');
+    // return json_decode(__DIR__ . '/../assets/static/data/countries.json');
+    // return json_decode(dirname(__DIR__) . '/assets/static/data/countries.json');
+    return json_encode(dirname(__DIR__) . '\assets\static\data\countries.json');
+});
+
 Router::register('post', '/api/login', function () {
     $inputContent = file_get_contents('php://input');
     $stdObject = json_decode($inputContent, false);

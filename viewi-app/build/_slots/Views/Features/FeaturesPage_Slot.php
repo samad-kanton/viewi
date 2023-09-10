@@ -26,7 +26,7 @@ function RenderFeaturesPage_Slot(
     if ($attrValue !== null) {
         $_content .= ' href="' . htmlentities($attrValue) . '"';
     }
-    $_content .= ' class="flex md:flex-col gap-4 sm:gap-x-2 hover:scale-[110%] duration-500">
+    $_content .= ' class="flex md:flex-col gap-4 sm:gap-x-2 hover:scale-[105%] duration-500">
                     <i class="lni lni-';
     $temp = $feature->icon;
     if ($temp !== null) {

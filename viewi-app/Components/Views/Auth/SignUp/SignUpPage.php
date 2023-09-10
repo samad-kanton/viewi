@@ -16,7 +16,7 @@ class SignUpPage extends BaseComponent
 {
     public string $title = "Create a MyshopOS account";
     public StaticDataService $staticDataService;
-    public string $staticData;
+    public $staticData = [];
 
     private HttpClient $http;
     private ClientRouter $router;
@@ -25,7 +25,8 @@ class SignUpPage extends BaseComponent
         $this->http = $http;
         $this->router = $router;
         $this->staticDataService = $staticDataService;
-        $this->ReadCountries();
+        // $this->ReadCountries();
+        $this->staticData[] = [1,2,3];
     }
 
     function __rendered() {
@@ -50,14 +51,19 @@ class SignUpPage extends BaseComponent
         // }, function($error){
         //     echo $error;
         // });
+        // $this->staticDataService->GetCountries(function($staticData){
+        //     echo $staticData;
+        //     $this->staticData = $staticData;
+        // });
+        // $this->staticData[] = [1,2,3];
     }
 
-    function ReadCountries(){
-        $this->staticDataService->GetCountries(function($staticData){
-            echo $staticData;
-            $this->staticData = $staticData;
-        });    
-    }
+    // function ReadCountries(){
+    //     $this->staticDataService->GetCountries(function($staticData){
+    //         // echo $staticData;
+    //         $this->staticData = $staticData;
+    //     });
+    // }
 
     function handleSignUp(DomEvent $event){
         $event->preventDefault();

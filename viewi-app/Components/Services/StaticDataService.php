@@ -20,6 +20,8 @@ class StaticDataService {
         $this->http->get('/viewi-app/assets/static/data/countries.json')
         ->then(function($data) use ($callback) {
             // echo $data;
+            // $data = ["name" => "Kofi", "age" => 20];
+            // echo $data;
             $callback($data);
         }, function($error){
             echo $error;
